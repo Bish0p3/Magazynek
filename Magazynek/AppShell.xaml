@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Magazynek.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Magazynek"
+    xmlns:views="clr-namespace:Magazynek.Views"
+    Shell.FlyoutBehavior="Flyout">
+
+
+    <!--Loading Page-->
+    <ShellContent
+        Title="Loading"
+        ContentTemplate="{DataTemplate views:LoadingPage}"
+        Route="loading" />
+
+    <!--Login Page-->
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage"/>
+
+    <ShellContent
+        Title="Strona główna"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="MainPage" />
+    <ShellContent
+        Title="Magazyn"
+        ContentTemplate="{DataTemplate views:MagazynPage}"
+        Route="MagazynPage" />
+    <ShellContent
+        Title="Umowy"
+        ContentTemplate="{DataTemplate views:UmowyPage}"
+        Route="UmowyPage" />
+
+    <!--Main Page-->
+    <TabBar>
+        <Tab Title="Home" Icon="house_door_fill.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+        Title="Home"
+        ContentTemplate="{DataTemplate views:UmowyPage}"
+        Route="home" />
+
+        </Tab>
+        <Tab Title="Settings" Icon="gear_fill.svg">
+            <ShellContent
+                Icon="house_door_fill.svg"
+        Title="Settings"
+        ContentTemplate="{DataTemplate views:UmowyPage}"
+        Route="settings" />
+        </Tab>
+    </TabBar>
+</Shell>
