@@ -2,23 +2,34 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Magazynek.Views.MagazynPage"
-             Title="MagazynPage">
-    
-    <ListView ItemsSource="{Binding Items}" HasUnevenRows="False" RowHeight="75">
+             Title="MagazynPage"
+             xmlns:local="clr-namespace:Magazynek.ViewModels">
+
+    <ContentPage.BindingContext>
+        <local:ItemsViewModel />
+    </ContentPage.BindingContext>
+
+    <Shell.TitleView>
+        <StackLayout>
+            <Label Text="Magazyn"/>
+            <Button Text="Importuj" Command="{Binding Button_OpenFileCommand}"  HeightRequest="50" WidthRequest="100" HorizontalOptions="End"></Button>
+        </StackLayout>
+    </Shell.TitleView>
+
+    <ListView ItemsSource="{Binding Items}" HasUnevenRows="True" RowHeight="75">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <!-- Define the layout for each item in the list -->
                     <StackLayout Orientation="Horizontal">
                         <StackLayout>
-                            <Image Source="{Binding Photo}" HeightRequest="50" WidthRequest="50" />
+                            <Image Source="{Binding Photo}" HeightRequest="25" WidthRequest="25" />
                         </StackLayout>
                         <StackLayout Padding="10">
-                            <!--<Image Source="{Binding Photo}" HeightRequest="50" WidthRequest="50" /> -->
-                            <Label Text="{Binding Name}" FontAttributes="Bold" />
-                            <Label Text="{Binding Description}" />
+                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Body"/>
+                            <Label Text="{Binding Description}" LineBreakMode="CharacterWrap" MaximumWidthRequest="200" />
                         </StackLayout>
-                        <StackLayout Padding="10">
+                        <StackLayout Padding="10" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                             <Label Text="{Binding Quantity, StringFormat='Ilość: {0}'}" />
                             <Label Text="{Binding Price, StringFormat='Cena: {0} zł'}" />
                         </StackLayout>

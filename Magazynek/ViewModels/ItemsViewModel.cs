@@ -4,20 +4,32 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Magazynek.Helpers;
 using Magazynek.Models;
+using OfficeOpenXml;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Magazynek.ViewModels
 {
     public class ItemsViewModel : ObservableObject
     {
-        private ObservableCollection<ExcelDataModel> _items;
-        public ObservableCollection<ExcelDataModel> Items
+
+
+        private ObservableCollection<Item> _items;
+
+        public ICommand Button_OpenFileCommand { get; }
+        public ObservableCollection<Item> Items
         {
             get => _items;
-            set => SetProperty(ref _items, value);
+            set
+            {
+                _items = value;
+                OnPropertyChanged(nameof(Items));
+            }
         }
-        public async Task<FileResult> PickAndShow(PickOptions options)
+
+        public async Task PickAndShow(PickOptions options)
         {
             try
             {
@@ -32,24 +44,48 @@ namespace Magazynek.ViewModels
                     }
                 }
 
-                return result;
+                FileInfo fileInfo = new FileInfo(Path.GetFullPath(result.FullPath));
+
+                using var package = new ExcelPackage(new FileInfo(fileInfo.ToString()));
+                var worksheet = package.Workbook.Worksheets.First();
+
+
+
+                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                {
+                    Items.Add(new Item
+                    {
+                        Photo = "",
+                        Name = worksheet.Cells[row, 1].Value?.ToString(),
+                        Description = worksheet.Cells[row, 2].Value?.ToString(),
+                        Quantity = Convert.ToInt32(worksheet.Cells[row, 3].Value),
+                        Price = Convert.ToDecimal(worksheet.Cells[row, 4].Value)
+                    });
+                }
             }
             catch (Exception ex)
             {
                 // The user canceled or something went wrong
             }
-
-            return null;
         }
 
         public ItemsViewModel()
         {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // or 
+            Items = new ObservableCollection<Item>();
 
-            // Replace "your_excel_file_path.xlsx" with the actual path to your Excel file
-            var excelFilePath = PickAndShow;
-            FileInfo fileInfo = new FileInfo(Path.GetFullPath(excelFilePath.ToString()));
-            var excelReader = new ExcelReader();
-            Items = new ObservableCollection<ExcelDataModel>(excelReader.ReadExcelFile(fileInfo.ToString()));
+            Items.Add(new Item
+            {
+                Photo = "",
+                Name = "Krzesło",
+                Description = "Po prostu krzesło",
+                Quantity = 10,
+                Price = 19.99M
+            });
+
+            Button_OpenFileCommand = new Command(ExecuteButton_OpenFileCommand);
+
+
 
             //// Initialize the ObservableCollection and add some sample products
             //Items = new ObservableCollection<Item>
@@ -67,6 +103,12 @@ namespace Magazynek.ViewModels
             //        Price = 29.99M },
             //    // Add more products as needed
             //};
+        }
+
+        private void ExecuteButton_OpenFileCommand()
+        {
+            PickOptions options = new();
+            _ = PickAndShow(options);
         }
     }
 }
