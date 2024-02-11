@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Magazynek.Helpers;
 using Magazynek.Models;
+using Magazynek.Services;
 using OfficeOpenXml;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -15,10 +16,19 @@ namespace Magazynek.ViewModels
     public class ItemsViewModel : ObservableObject
     {
 
+        #region FIELDS
+        private ObservableCollection<AsortymentyModel> _asortyment;
+        public ObservableCollection<AsortymentyModel> Asortyment
+        {
+            get => _asortyment;
+            set
+            {
+                _asortyment = value;
+                OnPropertyChanged(nameof(Asortyment));
+            }
+        }
 
         private ObservableCollection<Item> _items;
-
-        public ICommand Button_OpenFileCommand { get; }
         public ObservableCollection<Item> Items
         {
             get => _items;
@@ -27,6 +37,51 @@ namespace Magazynek.ViewModels
                 _items = value;
                 OnPropertyChanged(nameof(Items));
             }
+        }
+
+        public ICommand Button_OpenFileCommand { get; }
+        #endregion
+
+       
+
+        #region CONSTRUCTOR
+        public ItemsViewModel()
+        {
+            Button_OpenFileCommand = new Command(ExecuteButton_OpenFileCommand);
+
+            // Initialize the ObservableCollection
+            Asortyment = new ObservableCollection<AsortymentyModel>();
+
+
+
+            // Call method to populate data
+            PopulateData();
+        }
+        #endregion
+
+        #region METHODS
+        private void ExecuteButton_OpenFileCommand()
+        {
+            PickOptions options = new();
+            _ = PickAndShow(options);
+        }
+
+        private void PopulateData()
+        {
+            // Call your data service here (e.g., SqlServerService)
+            // to get data and add it to DataItems
+            // ...
+            // Initialize DatabaseService
+            DatabaseService _databaseService = new DatabaseService();
+            List<AsortymentyModel> data = _databaseService.GetYourData();
+            foreach (var item in data)
+            {
+                Asortyment.Add(item);
+            }
+            // For demonstration purposes, adding dummy data
+            Asortyment.Add(new AsortymentyModel { Id = 1, Nazwa = "Item 1" });
+            Asortyment.Add(new AsortymentyModel { Id = 2, Nazwa = "Item 2" });
+            // Add more items as needed
         }
 
         public async Task PickAndShow(PickOptions options)
@@ -65,51 +120,12 @@ namespace Magazynek.ViewModels
             }
             catch (Exception ex)
             {
-                // The user canceled or something went wrong
+                string message = ex.Message;
             }
         }
-
-        public ItemsViewModel()
-        {
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial; // or 
-            Items = new ObservableCollection<Item>();
-
-            Items.Add(new Item
-            {
-                Photo = "",
-                Name = "Krzesło",
-                Description = "Po prostu krzesło",
-                Quantity = 10,
-                Price = 19.99M
-            });
-
-            Button_OpenFileCommand = new Command(ExecuteButton_OpenFileCommand);
+        #endregion
 
 
-
-            //// Initialize the ObservableCollection and add some sample products
-            //Items = new ObservableCollection<Item>
-            //{
-            //    new Item { Photo = "", 
-            //        Name = "Krzesło", 
-            //        Description = "Po prostu krzesło", 
-            //        Quantity = 10, 
-            //        Price = 19.99M },
-            //    new Item { 
-            //        Photo = "", 
-            //        Name = "Jabłko", 
-            //        Description = "Kraj pochodzenia: Polska", 
-            //        Quantity = 5, 
-            //        Price = 29.99M },
-            //    // Add more products as needed
-            //};
-        }
-
-        private void ExecuteButton_OpenFileCommand()
-        {
-            PickOptions options = new();
-            _ = PickAndShow(options);
-        }
     }
 }
 

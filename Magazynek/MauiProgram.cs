@@ -6,6 +6,10 @@ namespace Magazynek
     {
         public static MauiApp CreateMauiApp()
         {
+            // DB ERRORS WORKAROUND
+#if ANDROID && DEBUG
+		Platforms.Android.DangerousTrustProvider.Register();
+#endif
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()

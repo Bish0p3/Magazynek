@@ -16,7 +16,7 @@
         </StackLayout>
     </Shell.TitleView>
 
-    <ListView ItemsSource="{Binding Items}" HasUnevenRows="True" RowHeight="75">
+    <ListView ItemsSource="{Binding Asortyment}" HasUnevenRows="True" RowHeight="75">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
@@ -26,8 +26,8 @@
                             <Image Source="{Binding Photo}" HeightRequest="25" WidthRequest="25" />
                         </StackLayout>
                         <StackLayout Padding="10">
-                            <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Body"/>
-                            <Label Text="{Binding Description}" LineBreakMode="CharacterWrap" MaximumWidthRequest="200" />
+                            <Label Text="{Binding Nazwa}" FontAttributes="Bold" FontSize="Body"/>
+                            <Label Text="{Binding Opis}" LineBreakMode="CharacterWrap" MaximumWidthRequest="200" />
                         </StackLayout>
                         <StackLayout Padding="10" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
                             <Label Text="{Binding Quantity, StringFormat='Ilość: {0}'}" />

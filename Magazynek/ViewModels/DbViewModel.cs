@@ -1,29 +1,13 @@
-﻿using Magazynek.Data;
-using Magazynek.Helpers;
+﻿using Magazynek.Helpers;
 using Magazynek.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+using Magazynek.Services;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Magazynek.ViewModels
 {
     public class DbViewModel : ObservableObject
     {
-        public DbViewModel() 
-        {
-
-        }
-        private readonly ApplicationDbContext _context;
-
-        public DbViewModel(ApplicationDbContext context)
-        {
-            _context = context;
-        }
 
         private ObservableCollection<AsortymentyModel> _asortyment;
         public ObservableCollection<AsortymentyModel> Asortyment
@@ -50,11 +34,18 @@ namespace Magazynek.ViewModels
 
         private void LoadData()
         {
-            var dbContext = new ApplicationDbContext();
-            if (dbContext.IsDatabaseConnected())
+            DatabaseService dbservice = new DatabaseService();
+            
+            if (dbservice != null)
             {
+                //using (var _context = new ApplicationDbContext())
+                //{
+                //    // Retrieve data using LINQ query
+                //    List<AsortymentyModel> dataList = _context.Asortyment.ToList();
+
+                //}
                 Console.WriteLine("Database is connected!");
-                Asortyment = new ObservableCollection<AsortymentyModel>(_context.Asortyment.ToList());
+                Asortyment = new ObservableCollection<AsortymentyModel>();
             }
             else
             {
@@ -63,7 +54,6 @@ namespace Magazynek.ViewModels
                 {
                     new AsortymentyModel { Nazwa = "TEST"}
                 };
-
             }
 
         }
