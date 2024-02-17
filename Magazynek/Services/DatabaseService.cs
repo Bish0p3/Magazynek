@@ -1,10 +1,4 @@
 ﻿using Magazynek.Models;
-using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 
 namespace Magazynek.Services
@@ -14,16 +8,16 @@ namespace Magazynek.Services
         public DatabaseService()
         {
 
-
         }
-        public List<AsortymentyModel> GetYourData()
+
+        public async Task<List<AsortymentyModel>> GetYourDataAsync()
         {
             string srvrdbname = "Nexo_demo_1";
-            string srvrname = "192.168.2.164";
+            string srvrname = "KONKUTER\\MAGAZYNEK";
             string srvrusername = "borys";
             string srvrpassword = "admin";
 
-            string sqlconn = $"Data Source={srvrname};Initial Catalog={srvrdbname};MultipleActiveResultSets=true; User Id={srvrusername};Password={srvrpassword};Persist Security Info=True;TrustServerCertificate=True;Connection Timeout=30;";
+            string sqlconn = $"Data Source={srvrname};Initial Catalog={srvrdbname};MultipleActiveResultSets=true; User Id={srvrusername};Password={srvrpassword};Persist Security Info=True;TrustServerCertificate=True;Encrypt=false";
 
             List<AsortymentyModel> data = new List<AsortymentyModel>();
 
@@ -31,20 +25,28 @@ namespace Magazynek.Services
             {
                 using (SqlConnection connection = new SqlConnection(sqlconn))
                 {
-                    connection.Open();
+                    await connection.OpenAsync();
 
-                    string sqlQuery = "SELECT Id, Nazwa FROM ModelDanychContainer.Asortymenty";
+                    string sqlQuery = "SELECT ModelDanychContainer.Asortymenty.Id, Symbol, Nazwa, Opis, CenaEwidencyjna, IloscDostepna, IloscZarezerwowanaIlosciowo, IloscZarezerwowanaDostawowo, Ilosc, Termin, Ilosciowa\r\nFROM ModelDanychContainer.Asortymenty\r\nFULL OUTER JOIN ModelDanychContainer.Rezerwacje ON ModelDanychContainer.Asortymenty.Id=ModelDanychContainer.Rezerwacje.Asortyment_Id\r\nFULL OUTER JOIN ModelDanychContainer.StanyMagazynowe ON ModelDanychContainer.Asortymenty.Id=ModelDanychContainer.StanyMagazynowe.Asortyment_Id";
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
                         {
-                            while (reader.Read())
+                            while (await reader.ReadAsync())
                             {
                                 AsortymentyModel item = new AsortymentyModel
                                 {
                                     Id = reader.GetInt32(0),
-                                    Nazwa = reader.GetString(1),
-                                    // Map other properties as needed
+                                    Symbol = reader.GetString(1),
+                                    Nazwa = reader.GetString(2),
+                                    Opis = reader.GetString(3),
+                                    CenaEwidencyjna = reader.GetValue(4),
+                                    IloscDostepna = reader.GetValue(5),
+                                    IloscZarezerwowanaIlosciowo = reader.GetValue(6),
+                                    IloscZarezerwowanaDostawowo = reader.GetValue(7),
+                                    Ilosc = reader.GetValue(8),
+                                    Termin = reader.GetValue(9),
+                                    Ilosciowa = reader.GetValue(10)
                                 };
                                 data.Add(item);
                             }
@@ -55,6 +57,7 @@ namespace Magazynek.Services
             catch (Exception ex)
             {
                 string message = ex.Message;
+                // Handle the exception
             }
 
             return data;

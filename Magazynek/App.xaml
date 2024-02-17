@@ -9,6 +9,12 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <ResourceDictionary>
+                <Style x:Key="Labelfont" TargetType="Label">
+                    <Setter Property="FontSize" Value="12" />
+                </Style>
+            </ResourceDictionary>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -11,30 +11,39 @@
 
     <Shell.TitleView>
         <StackLayout>
-            <Label Text="Magazyn"/>
+            <Label Text="Stan magazynu"/>
+            <Button Text="Wybierz magazyn"/>
             <Button Text="Importuj" Command="{Binding Button_OpenFileCommand}"  HeightRequest="50" WidthRequest="100" HorizontalOptions="End"></Button>
         </StackLayout>
     </Shell.TitleView>
 
-    <ListView ItemsSource="{Binding Asortyment}" HasUnevenRows="True" RowHeight="75">
+    <ListView ItemsSource="{Binding Asortyment}" HasUnevenRows="True" RowHeight="75" IsPullToRefreshEnabled="True" RefreshCommand="{Binding ListView_RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" SelectedItem="{Binding ListView_ItemSelectedCommand}">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
                     <!-- Define the layout for each item in the list -->
-                    <StackLayout Orientation="Horizontal">
-                        <StackLayout>
-                            <Image Source="{Binding Photo}" HeightRequest="25" WidthRequest="25" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Padding="10" Grid.Column="0" VerticalOptions="Start">
+                            <Label Text="Symbol:" Style="{StaticResource Labelfont}"/>
+                            <Label Text="{Binding Symbol}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="TailTruncation"/>
+                            <Label Text="Nazwa:" Style="{StaticResource Labelfont}"/>
+                            <Label Text="{Binding Nazwa}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
+                            <Label Text="Cena:" Style="{StaticResource Labelfont}" />
+                            <Label Text="{Binding CenaEwidencyjna, StringFormat='{0} zł'}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
                         </StackLayout>
-                        <StackLayout Padding="10">
-                            <Label Text="{Binding Nazwa}" FontAttributes="Bold" FontSize="Body"/>
-                            <Label Text="{Binding Opis}" LineBreakMode="CharacterWrap" MaximumWidthRequest="200" />
+                        <StackLayout Padding="10" VerticalOptions="Start" Grid.Column="1">
+                            <Label Text="Stan:" Style="{StaticResource Labelfont}"/>
+                            <Label Text="{Binding IloscDostepna}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
+                            <Label Text="ZAR.IL.:" Style="{StaticResource Labelfont}" LineBreakMode="WordWrap"/>
+                            <Label Text="{Binding IloscZarezerwowanaIlosciowo}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
+                            <Label Text="ZAR.DOST.:" Style="{StaticResource Labelfont}"/>
+                            <Label Text="{Binding IloscZarezerwowanaDostawowo}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
                         </StackLayout>
-                        <StackLayout Padding="10" HorizontalOptions="EndAndExpand" VerticalOptions="Center">
-                            <Label Text="{Binding Quantity, StringFormat='Ilość: {0}'}" />
-                            <Label Text="{Binding Price, StringFormat='Cena: {0} zł'}" />
-                        </StackLayout>
-                    </StackLayout>
-
+                    </Grid>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>

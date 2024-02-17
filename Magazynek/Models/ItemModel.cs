@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Magazynek.Helpers;
+﻿using Magazynek.Helpers;
 
 namespace Magazynek.Models
 {

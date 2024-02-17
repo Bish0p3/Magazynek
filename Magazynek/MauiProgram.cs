@@ -8,7 +8,7 @@ namespace Magazynek
         {
             // DB ERRORS WORKAROUND
 #if ANDROID && DEBUG
-		Platforms.Android.DangerousTrustProvider.Register();
+            Platforms.Android.DangerousTrustProvider.Register();
 #endif
             var builder = MauiApp.CreateBuilder();
             builder
@@ -20,7 +20,7 @@ namespace Magazynek
                 });
 
 #if DEBUG
-		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();

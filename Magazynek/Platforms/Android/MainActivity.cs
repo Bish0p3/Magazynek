@@ -11,7 +11,7 @@ namespace Magazynek
         {
             base.OnCreate(bundle);
 #if DEBUG
-        Platforms.Android.DangerousTrustProvider.Register();
+            Platforms.Android.DangerousTrustProvider.Register();
 #endif
         }
     }

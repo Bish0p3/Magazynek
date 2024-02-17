@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Magazynek.Models;
+﻿using Magazynek.Models;
 using OfficeOpenXml; // NuGet Package
 
 namespace Magazynek.Helpers
@@ -38,7 +33,7 @@ namespace Magazynek.Helpers
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine($"Error opening Excel file: {ex.Message}");
             }

@@ -1,21 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Magazynek.Helpers;
+﻿using Magazynek.Helpers;
 using Magazynek.Models;
 using Magazynek.Services;
 using OfficeOpenXml;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Magazynek.ViewModels
 {
     public class ItemsViewModel : ObservableObject
     {
-
         #region FIELDS
         private ObservableCollection<AsortymentyModel> _asortyment;
         public ObservableCollection<AsortymentyModel> Asortyment
@@ -39,49 +32,88 @@ namespace Magazynek.ViewModels
             }
         }
 
-        public ICommand Button_OpenFileCommand { get; }
-        #endregion
+        private bool _isRefreshing;
+        public bool IsRefreshing
+        {
+            get => _isRefreshing;
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
 
-       
+        public ICommand Button_OpenFileCommand { get; }
+        public ICommand ListView_ItemSelectedCommand { get; }
+        public ICommand ListView_RefreshCommand { get; }
+        #endregion
 
         #region CONSTRUCTOR
         public ItemsViewModel()
         {
-            Button_OpenFileCommand = new Command(ExecuteButton_OpenFileCommand);
+            Button_OpenFileCommand = new Command(async () => await ExecuteButton_OpenFileCommand());
+            ListView_ItemSelectedCommand = new Command<AsortymentyModel>(Execute_OnItemSelected);
+            ListView_RefreshCommand = new Command(async () => await ExecuteRefreshCommand());
 
             // Initialize the ObservableCollection
             Asortyment = new ObservableCollection<AsortymentyModel>();
 
-
-
             // Call method to populate data
-            PopulateData();
+            _ = PopulateData();
         }
         #endregion
 
         #region METHODS
-        private void ExecuteButton_OpenFileCommand()
+        private async Task ExecuteButton_OpenFileCommand()
         {
             PickOptions options = new();
-            _ = PickAndShow(options);
+            await PickAndShow(options);
         }
 
-        private void PopulateData()
+        private void Execute_OnItemSelected(AsortymentyModel selectedItem)
         {
-            // Call your data service here (e.g., SqlServerService)
-            // to get data and add it to DataItems
-            // ...
-            // Initialize DatabaseService
-            DatabaseService _databaseService = new DatabaseService();
-            List<AsortymentyModel> data = _databaseService.GetYourData();
-            foreach (var item in data)
+            // You can raise an event or call a method in the View
+            ItemSelected?.Invoke(this, new ItemSelectedEventArgs(selectedItem));
+        }
+
+        private async Task ExecuteRefreshCommand()
+        {
+            try
             {
-                Asortyment.Add(item);
+                // Set IsRefreshing to true to show the refresh animation
+                IsRefreshing = true;
+
+                // Your refresh logic goes here
+                await PopulateData();
             }
-            // For demonstration purposes, adding dummy data
-            Asortyment.Add(new AsortymentyModel { Id = 1, Nazwa = "Item 1" });
-            Asortyment.Add(new AsortymentyModel { Id = 2, Nazwa = "Item 2" });
-            // Add more items as needed
+            catch (Exception ex)
+            {
+                // Handle exceptions if needed
+            }
+            finally
+            {
+                // Set IsRefreshing to false to hide the refresh animation
+                IsRefreshing = false;
+            }
+        }
+
+        public async Task PopulateData()
+        {
+            // ...
+            await Task.Run(async () =>
+            {
+                // Call your data service here (e.g., SqlServerService)
+                // to get data and add it to DataItems
+                // ...
+                // Initialize DatabaseService
+                Asortyment.Clear();
+                DatabaseService _databaseService = new DatabaseService();
+                List<AsortymentyModel> data = await _databaseService.GetYourDataAsync();
+                foreach (var item in data)
+                {
+                    Asortyment.Add(item);
+                }
+            });
         }
 
         public async Task PickAndShow(PickOptions options)
@@ -104,8 +136,6 @@ namespace Magazynek.ViewModels
                 using var package = new ExcelPackage(new FileInfo(fileInfo.ToString()));
                 var worksheet = package.Workbook.Worksheets.First();
 
-
-
                 for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                 {
                     Items.Add(new Item
@@ -125,7 +155,20 @@ namespace Magazynek.ViewModels
         }
         #endregion
 
+        #region EVENTS
+        // Define an event to be raised when an item is selected
+        public event EventHandler<ItemSelectedEventArgs> ItemSelected;
+        #endregion
+    }
 
+    // Define custom EventArgs if needed
+    public class ItemSelectedEventArgs : EventArgs
+    {
+        public AsortymentyModel SelectedItem { get; }
+
+        public ItemSelectedEventArgs(AsortymentyModel selectedItem)
+        {
+            SelectedItem = selectedItem;
+        }
     }
 }
-

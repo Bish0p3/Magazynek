@@ -3,9 +3,14 @@ namespace Magazynek.Views;
 
 public partial class MagazynPage : ContentPage
 {
-	public MagazynPage()
-	{
-		InitializeComponent();
+    public MagazynPage()
+    {
+        InitializeComponent();
+        BindingContext = new ItemsViewModel();
+    }
+
+    private void Refresh_List(object sender, EventArgs e)
+    {
         BindingContext = new ItemsViewModel();
     }
 

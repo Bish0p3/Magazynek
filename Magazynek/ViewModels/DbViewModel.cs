@@ -35,7 +35,7 @@ namespace Magazynek.ViewModels
         private void LoadData()
         {
             DatabaseService dbservice = new DatabaseService();
-            
+
             if (dbservice != null)
             {
                 //using (var _context = new ApplicationDbContext())
