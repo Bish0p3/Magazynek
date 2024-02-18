@@ -5,22 +5,9 @@
              Title="UmowyPage"
              xmlns:local="clr-namespace:Magazynek.ViewModels">
 
-    <ContentPage.BindingContext>
-        <local:DbViewModel />
-    </ContentPage.BindingContext>
 
     <StackLayout>
-        <Button Text="Show Data" Command="{Binding ShowDataCommand}" />
-        <ListView ItemsSource="{Binding Asortyment}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Nazwa}"/>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Button Text="Show Data"/>
+
     </StackLayout>
 </ContentPage>

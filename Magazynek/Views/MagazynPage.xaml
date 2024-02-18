@@ -13,11 +13,17 @@
         <StackLayout>
             <Label Text="Stan magazynu"/>
             <Button Text="Wybierz magazyn"/>
-            <Button Text="Importuj" Command="{Binding Button_OpenFileCommand}"  HeightRequest="50" WidthRequest="100" HorizontalOptions="End"></Button>
         </StackLayout>
     </Shell.TitleView>
 
-    <ListView ItemsSource="{Binding Asortyment}" HasUnevenRows="True" RowHeight="75" IsPullToRefreshEnabled="True" RefreshCommand="{Binding ListView_RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" SelectedItem="{Binding ListView_ItemSelectedCommand}">
+    <ListView ItemsSource="{Binding Asortyment}" 
+              HasUnevenRows="True" 
+              RowHeight="75" 
+              IsPullToRefreshEnabled="True" 
+              ItemSelected="{Binding OnItemSelected}"
+              RefreshCommand="{Binding ListView_RefreshCommand}" 
+              IsRefreshing="{Binding IsRefreshing}"
+              >
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>

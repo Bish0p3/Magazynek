@@ -2,7 +2,6 @@
 
 namespace Magazynek.Models
 {
-    [Table("ModelDanychContainer.Asortymenty")] // Specify the table name here
     public class AsortymentyModel
     {
         public int Id { get; set; }
