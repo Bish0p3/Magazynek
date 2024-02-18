@@ -20,7 +20,7 @@
               HasUnevenRows="True" 
               RowHeight="75" 
               IsPullToRefreshEnabled="True" 
-              ItemSelected="{Binding OnItemSelected}"
+              ItemSelected="OnItemSelected"
               RefreshCommand="{Binding ListView_RefreshCommand}" 
               IsRefreshing="{Binding IsRefreshing}"
               >
@@ -33,21 +33,15 @@
                             <ColumnDefinition Width="3*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <StackLayout Padding="10" Grid.Column="0" VerticalOptions="Start">
+                        <StackLayout Padding="5" Grid.Column="0" VerticalOptions="Start">
                             <Label Text="Symbol:" Style="{StaticResource Labelfont}"/>
                             <Label Text="{Binding Symbol}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="TailTruncation"/>
                             <Label Text="Nazwa:" Style="{StaticResource Labelfont}"/>
                             <Label Text="{Binding Nazwa}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
-                            <Label Text="Cena:" Style="{StaticResource Labelfont}" />
-                            <Label Text="{Binding CenaEwidencyjna, StringFormat='{0} zł'}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
                         </StackLayout>
-                        <StackLayout Padding="10" VerticalOptions="Start" Grid.Column="1">
+                        <StackLayout Padding="5" Grid.Column="1" VerticalOptions="Start">
                             <Label Text="Stan:" Style="{StaticResource Labelfont}"/>
-                            <Label Text="{Binding IloscDostepna}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
-                            <Label Text="ZAR.IL.:" Style="{StaticResource Labelfont}" LineBreakMode="WordWrap"/>
-                            <Label Text="{Binding IloscZarezerwowanaIlosciowo}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
-                            <Label Text="ZAR.DOST.:" Style="{StaticResource Labelfont}"/>
-                            <Label Text="{Binding IloscZarezerwowanaDostawowo}" FontAttributes="Bold" Style="{StaticResource Labelfont}" />
+                            <Label Text="{Binding IloscDostepna}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
                         </StackLayout>
                     </Grid>
                 </ViewCell>

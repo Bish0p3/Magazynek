@@ -1,6 +1,7 @@
 ﻿using Magazynek.Helpers;
 using Magazynek.Models;
 using Magazynek.Services;
+using Magazynek.Views;
 using OfficeOpenXml;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -32,15 +33,24 @@ namespace Magazynek.ViewModels
             }
         }
 
-        public ICommand ListView_ItemSelectedCommand { get; }
         public ICommand ListView_RefreshCommand { get; }
+
+        private AsortymentyModel _selectedAsortyment;
+        public AsortymentyModel SelectedAsortyment
+        {
+            get => _selectedAsortyment;
+            set
+            {
+                _selectedAsortyment = value;
+                OnPropertyChanged(nameof(SelectedAsortyment));
+            }
+        }
         #endregion
 
         #region CONSTRUCTOR
         public ItemsViewModel()
         {
             ListView_RefreshCommand = new Command(async () => await ExecuteRefreshCommand());
-            ListView_ItemSelectedCommand = new Command(ExecuteItemSelected);
 
             // Initialize the ObservableCollection
             Asortyment = new ObservableCollection<AsortymentyModel>();
@@ -51,10 +61,6 @@ namespace Magazynek.ViewModels
         #endregion
 
         #region METHODS
-        private void ExecuteItemSelected(object selectedItem)
-        {
-            
-        }
         private async Task ExecuteRefreshCommand()
         {
             try
@@ -97,7 +103,8 @@ namespace Magazynek.ViewModels
 
         #endregion
 
+
+
     }
 
-    // Define custom EventArgs if neede
 }

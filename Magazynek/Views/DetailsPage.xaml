@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Magazynek.Views.DetailsPage"
+             xmlns:local="clr-namespace:Magazynek.ViewModels">
+
+    <ContentPage.BindingContext>
+        <local:DetailsViewModel />
+    </ContentPage.BindingContext>
+    
+
+    <StackLayout Padding="5" Spacing="5">
+        <!-- Display detailed information here -->
+        <Label Text="Nazwa: " />
+        <Label Text="{Binding SelectedAsortyment.Nazwa}" />
+        <Label Text="Opis: "/>
+        <Label Text="{Binding SelectedAsortyment.Opis}" />
+        <Label Text="Symbol: "/>
+        <Label Text="{Binding SelectedAsortyment.Symbol}" />
+        <Label Text="Cena ewidencyjna: "/>
+        <Label Text="{Binding SelectedAsortyment.CenaEwidencyjna}" />
+        <Label Text="ID: "/>
+        <Label Text="{Binding SelectedAsortyment.Id}" />
+        <Label Text="Ilość: "/>
+        <Label Text="{Binding SelectedAsortyment.Ilosc}" />
+        <Label Text="Ilość dostępna: "/>
+        <Label Text="{Binding SelectedAsortyment.IloscDostepna}" />
+        <Label Text="Ilościowa: "/>
+        <Label Text="{Binding SelectedAsortyment.Ilosciowa}" />
+        <Label Text="Ilość zarezerwowana dostawowo: "/>
+        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaDostawowo}" />
+        <Label Text="Ilość zarezerwowana ilościowo: "/>
+        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaIlosciowo}" />
+        <Label Text="Termin: "/>
+        <Label Text="{Binding SelectedAsortyment.Termin}" />
+        <!-- Add more labels for other details -->
+
+        <!-- Add any other UI elements you need for details -->
+    </StackLayout>
+</ContentPage>
