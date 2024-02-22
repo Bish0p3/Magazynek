@@ -74,6 +74,7 @@ namespace Magazynek.ViewModels
             catch (Exception ex)
             {
                 // Handle exceptions if needed
+                Console.Write(ex.ToString());
             }
             finally
             {

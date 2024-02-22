@@ -80,6 +80,12 @@
 	  <MauiXaml Update="Views\MagazynPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\MainPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\NowaRezerwacjaPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\UmowyPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

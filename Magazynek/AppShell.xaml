@@ -13,16 +13,15 @@
         Title="Loading"
         ContentTemplate="{DataTemplate views:LoadingPage}"
         Route="loading" />
-
+    
     <!--Login Page-->
     <ShellContent
         Title="Login"
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"/>
-
     <ShellContent
         Title="Strona główna"
-        ContentTemplate="{DataTemplate views:LoginPage}"
+        ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
     <ShellContent
         Title="Magazyn"

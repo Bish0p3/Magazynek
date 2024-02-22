@@ -7,34 +7,84 @@
     <ContentPage.BindingContext>
         <local:DetailsViewModel />
     </ContentPage.BindingContext>
+
+
+    <Grid RowDefinitions="Auto, 3*, 70">
+        <!-- region header-->
+        <Label Text="DANE TOWARU" FontSize="Large" Grid.Row="0" Margin="5"/>
+        <!-- endregion -->
+        
+        <!-- region main-->
+        <StackLayout Padding="5" Spacing="5" Grid.Row="1">
+            <!--Nazwa i opis-->
+            <Label Text="Nazwa: " />
+            <Frame Padding="5">
+                <Label Text="{Binding SelectedAsortyment.Nazwa}" />
+            </Frame>
+            <Label Text="Opis: "/>
+            <Frame Padding="5">
+                <Label Text="{Binding SelectedAsortyment.Opis}" />
+            </Frame>
+            <!--Reszta danych-->
+            <Grid RowDefinitions="*, *" ColumnDefinitions="*,*" ColumnSpacing="5" RowSpacing="5">
+                <Label Text="Symbol: " Grid.Column="0" Grid.Row="0"/>
+                <Frame Grid.Column="0" Grid.Row="1" Padding="5">
+                    <Label Text="{Binding SelectedAsortyment.Symbol}" />
+                </Frame>
+
+                <Label Text="ID: " Grid.Column="1"/>
+                <Frame Grid.Column="1" Grid.Row="1" Padding="5">
+                    <Label Text="{Binding SelectedAsortyment.Id}" Grid.Column="1" Grid.Row="1"/>
+                </Frame>
+            </Grid>
+            <Label Text="Cena ewidencyjna: "/>
+            <Frame Padding="5">
+                <Label Text="{Binding SelectedAsortyment.CenaEwidencyjna}" />
+            </Frame>
+
+            <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="5" RowSpacing="5">
+                <Label Text="Ilość: "/>
+                <Frame Padding="5" Grid.Row="1">
+                    <Label Text="{Binding SelectedAsortyment.Ilosc}" />
+                </Frame>
+                <Label Text="Ilość dostępna: " Grid.Column="1"/>
+                <Frame Padding="5" Grid.Column="1" Grid.Row="1">
+                    <Label Text="{Binding SelectedAsortyment.IloscDostepna}"/>
+                </Frame>
+            </Grid>
+
+            <Line BackgroundColor="Black"/>
+            
+            <Label Text="REZERWACJE" FontSize="Large"/>
+            
+            <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="5" RowSpacing="5">
+                <Label Text="Razem dostawowo: "/>
+                <Frame Padding="5" Grid.Row="1">
+                    <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaDostawowo}" />
+                </Frame>
+                <Label Text="Razem ilościowo: " Grid.Column="1"/>
+                <Frame Padding="5" Grid.Column="1" Grid.Row="2">
+                    <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaIlosciowo}" Grid.Column="1" Grid.Row="2"/>
+                </Frame>
+            </Grid>
+            
+            <Label Text="Ilościowa: "/>
+            <Frame Padding="5">
+                <Label Text="{Binding SelectedAsortyment.Ilosciowa}" />
+            </Frame>
+            <Label Text="Termin: "/>
+            <Frame Padding="5">
+                <Label Text="{Binding SelectedAsortyment.Termin}"/>
+            </Frame>
+        </StackLayout>
+        <!-- endregion -->
+        
+        <!-- region footer -->
+        <Grid Grid.Row="2" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="DarkMagenta">
+            <Label Text="STOPKA" Grid.Row="0"/>
+            <Button Text="REZERWUJ" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1"/>
+        </Grid>
+        <!-- endregion --> 
+    </Grid>
     
-
-    <StackLayout Padding="5" Spacing="5">
-        <!-- Display detailed information here -->
-        <Label Text="Nazwa: " />
-        <Label Text="{Binding SelectedAsortyment.Nazwa}" />
-        <Label Text="Opis: "/>
-        <Label Text="{Binding SelectedAsortyment.Opis}" />
-        <Label Text="Symbol: "/>
-        <Label Text="{Binding SelectedAsortyment.Symbol}" />
-        <Label Text="Cena ewidencyjna: "/>
-        <Label Text="{Binding SelectedAsortyment.CenaEwidencyjna}" />
-        <Label Text="ID: "/>
-        <Label Text="{Binding SelectedAsortyment.Id}" />
-        <Label Text="Ilość: "/>
-        <Label Text="{Binding SelectedAsortyment.Ilosc}" />
-        <Label Text="Ilość dostępna: "/>
-        <Label Text="{Binding SelectedAsortyment.IloscDostepna}" />
-        <Label Text="Ilościowa: "/>
-        <Label Text="{Binding SelectedAsortyment.Ilosciowa}" />
-        <Label Text="Ilość zarezerwowana dostawowo: "/>
-        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaDostawowo}" />
-        <Label Text="Ilość zarezerwowana ilościowo: "/>
-        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaIlosciowo}" />
-        <Label Text="Termin: "/>
-        <Label Text="{Binding SelectedAsortyment.Termin}" />
-        <!-- Add more labels for other details -->
-
-        <!-- Add any other UI elements you need for details -->
-    </StackLayout>
 </ContentPage>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Magazynek.Views.MainPage"
+             Title="Strona główna">
+    <VerticalStackLayout Spacing="30" Margin="20">
+        <Label 
+            Text="Witaj! :NAME:"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        
+        <Button Text="STANY MAGAZYNOWE" Clicked="Magazyny_OnClick"/>
+        <Button Text="REZERWACJE" Clicked="Rezerwacje_OnClick"/>
+        <Button Text="USTAWIENIA" Clicked="Ustawienia_OnClick"/>
+        <Button Text="WYLOGUJ" Clicked="Wyloguj_OnClick"/>
+    </VerticalStackLayout>
+</ContentPage>
