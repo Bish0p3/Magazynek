@@ -22,6 +22,17 @@ namespace Magazynek.ViewModels
             }
         }
 
+        private ObservableCollection<AsortymentyModel> _asortymentSearched = new ObservableCollection<AsortymentyModel>();
+        public ObservableCollection<AsortymentyModel> AsortymentSearched
+        {
+            get => _asortymentSearched;
+            set
+            {
+                _asortymentSearched = value;
+                OnPropertyChanged(nameof(AsortymentSearched));
+            }
+        }
+
         private bool _isRefreshing;
         public bool IsRefreshing
         {
@@ -43,6 +54,19 @@ namespace Magazynek.ViewModels
             {
                 _selectedAsortyment = value;
                 OnPropertyChanged(nameof(SelectedAsortyment));
+            }
+        }
+
+        private string _searchText;
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                var linqResults = Asortyment.Where(s => s.Symbol.ToLower().Contains(_searchText.ToLower()));
+                AsortymentSearched = new ObservableCollection<AsortymentyModel>(linqResults);
+                OnPropertyChanged(nameof(SearchText));
             }
         }
         #endregion
@@ -93,14 +117,17 @@ namespace Magazynek.ViewModels
                 // ...
                 // Initialize DatabaseService
                 Asortyment.Clear();
+                AsortymentSearched.Clear();
                 DatabaseService _databaseService = new DatabaseService();
                 List<AsortymentyModel> data = await _databaseService.GetYourDataAsync();
                 foreach (var item in data)
                 {
                     Asortyment.Add(item);
+                    AsortymentSearched.Add(item);
                 }
             });
         }
+
 
         #endregion
 

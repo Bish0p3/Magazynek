@@ -16,36 +16,48 @@
         </StackLayout>
     </Shell.TitleView>
 
-    <ListView ItemsSource="{Binding Asortyment}" 
-              HasUnevenRows="True" 
-              RowHeight="75" 
-              IsPullToRefreshEnabled="True" 
-              ItemSelected="OnItemSelected"
-              RefreshCommand="{Binding ListView_RefreshCommand}" 
-              IsRefreshing="{Binding IsRefreshing}"
-              >
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <!-- Define the layout for each item in the list -->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <StackLayout Padding="5" Grid.Column="0" VerticalOptions="Start">
-                            <Label Text="Symbol:" Style="{StaticResource Labelfont}"/>
-                            <Label Text="{Binding Symbol}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="TailTruncation"/>
-                            <Label Text="Nazwa:" Style="{StaticResource Labelfont}"/>
-                            <Label Text="{Binding Nazwa}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
-                        </StackLayout>
-                        <StackLayout Padding="5" Grid.Column="1" VerticalOptions="Start">
-                            <Label Text="Stan:" Style="{StaticResource Labelfont}"/>
-                            <Label Text="{Binding IloscDostepna}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
-                        </StackLayout>
-                    </Grid>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+    <StackLayout>
+        
+        <SearchBar TextChanged="OnSearchTextChanged" 
+                   Placeholder="Wyszukaj"
+                   HorizontalOptions="Fill"
+                   BackgroundColor="GhostWhite"
+                   />
+
+        <ListView x:Name="list"
+                  ItemsSource="{Binding AsortymentSearched}" 
+                  HasUnevenRows="True" 
+                  RowHeight="75" 
+                  IsPullToRefreshEnabled="True" 
+                  ItemSelected="OnItemSelected"
+                  RefreshCommand="{Binding ListView_RefreshCommand}" 
+                  IsRefreshing="{Binding IsRefreshing}"
+                  ItemTapped="ListItemTapped"
+                  >
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Padding="5" Grid.Column="0" VerticalOptions="Start">
+                                <Label Text="Symbol:" Style="{StaticResource Labelfont}"/>
+                                <Label Text="{Binding Symbol}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="TailTruncation"/>
+                                <Label Text="Nazwa:" Style="{StaticResource Labelfont}"/>
+                                <Label Text="{Binding Nazwa}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
+                            </StackLayout>
+                            <StackLayout Padding="5" Grid.Column="1" VerticalOptions="Start">
+                                <Label Text="Stan:" Style="{StaticResource Labelfont}"/>
+                                <Label Text="{Binding IloscDostepna}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    
+    </StackLayout>
 </ContentPage>
