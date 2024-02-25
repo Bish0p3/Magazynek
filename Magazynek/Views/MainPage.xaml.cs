@@ -2,10 +2,10 @@ namespace Magazynek.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
-	{
-		InitializeComponent();
-	}
+    public MainPage()
+    {
+        InitializeComponent();
+    }
     private void Magazyny_OnClick(object sender, EventArgs e)
     {
         Navigation.PushAsync(new MagazynPage() { Title = "Magazyny" });

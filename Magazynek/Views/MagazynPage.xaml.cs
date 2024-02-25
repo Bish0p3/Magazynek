@@ -1,6 +1,5 @@
 using Magazynek.Models;
 using Magazynek.ViewModels;
-using System.Collections.ObjectModel;
 
 namespace Magazynek.Views;
 
@@ -22,7 +21,7 @@ public partial class MagazynPage : ContentPage
             viewModel.SelectedAsortyment = selectedAsortyment;
 
             // Change view to detailsPage
-            Navigation.PushAsync(new DetailsPage(selectedAsortyment) { Title = "Szczegó³y elementu"});
+            Navigation.PushAsync(new DetailsPage(selectedAsortyment) { Title = "Szczegó³y elementu" });
         }
     }
 

@@ -3,22 +3,19 @@ namespace Magazynek.Views;
 
 public partial class DetailsPage : ContentPage
 {
-	public DetailsPage(object selectedAsortyment)
-	{
-		InitializeComponent();
+    public DetailsPage(object selectedAsortyment)
+    {
+        InitializeComponent();
 
-		BindingContext = new DetailsViewModel();
+        BindingContext = new DetailsViewModel();
 
         var viewModel = (DetailsViewModel)BindingContext;
         viewModel.SelectedAsortyment = (Models.AsortymentyModel)selectedAsortyment;
-
+        viewModel.CheckIfShouldBeVisible();
     }
     private void Rezerwacja_OnClick(object sender, EventArgs e)
     {
-        //var viewModel = (ItemsViewModel)BindingContext;
-        //viewModel.SelectedAsortyment = selectedAsortyment;
-
-        // Optionally, navigate to details page or perform other actions
+        // JAK PRZEKAZAC DANE
         Navigation.PushAsync(new NowaRezerwacjaPage() { Title = "Nowa rezerwacja" });
     }
 }

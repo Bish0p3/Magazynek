@@ -1,8 +1,6 @@
 ﻿using Magazynek.Helpers;
 using Magazynek.Models;
 using Magazynek.Services;
-using Magazynek.Views;
-using OfficeOpenXml;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 

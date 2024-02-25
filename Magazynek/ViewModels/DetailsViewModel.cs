@@ -1,5 +1,4 @@
 ﻿using Magazynek.Models;
-using Magazynek.ViewModels;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -7,8 +6,18 @@ namespace Magazynek.ViewModels
 {
     public class DetailsViewModel : INotifyPropertyChanged
     {
-        private AsortymentyModel _selectedAsortyment;
+        private bool _isReservationVisible;
+        public bool IsReservationVisible
+        {
+            get { return _isReservationVisible; }
+            set
+            {
+                _isReservationVisible = value;
+                OnPropertyChanged(nameof(IsReservationVisible));
+            }
+        }
 
+        private AsortymentyModel _selectedAsortyment;
         public AsortymentyModel SelectedAsortyment
         {
             get { return _selectedAsortyment; }
@@ -17,17 +26,36 @@ namespace Magazynek.ViewModels
                 if (_selectedAsortyment != value)
                 {
                     _selectedAsortyment = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(SelectedAsortyment));
                 }
             }
         }
 
+
+
         public DetailsViewModel()
         {
             SelectedAsortyment = new AsortymentyModel();
+
             // Initialize or set SelectedItem as needed
             // For example: SelectedItem = new Item { Name = "Default Name", Description = "Default Description" };
         }
+
+
+
+        public void CheckIfShouldBeVisible()
+        {
+            if (SelectedAsortyment.Ilosciowa is DBNull)
+            {
+                IsReservationVisible = false;
+            }
+            else
+            {
+                IsReservationVisible = true;
+            }
+        }
+
+
 
         // INotifyPropertyChanged implementation (you can use a base class if available)
         public event PropertyChangedEventHandler PropertyChanged;

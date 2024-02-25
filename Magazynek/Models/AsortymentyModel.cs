@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Magazynek.Models
+﻿namespace Magazynek.Models
 {
     public class AsortymentyModel
     {

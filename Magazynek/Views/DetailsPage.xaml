@@ -53,36 +53,40 @@
                 </Frame>
             </Grid>
 
-            <Line BackgroundColor="Black"/>
-            
-            <Label Text="REZERWACJE" FontSize="Large"/>
-            
-            <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="5" RowSpacing="5">
-                <Label Text="Razem dostawowo: "/>
-                <Frame Padding="5" Grid.Row="1">
-                    <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaDostawowo}" />
+            <StackLayout Spacing="5" IsVisible="{Binding IsReservationVisible}">
+                <Line BackgroundColor="Black"/>
+                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+                    <Label Text="DANE REZERWACJI" FontSize="Large"/>
+                </StackLayout>
+                <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="5" RowSpacing="5">
+                    <Label Text="Razem dostawowo: "/>
+                    <Frame Padding="5" Grid.Row="1">
+                        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaDostawowo}" />
+                    </Frame>
+                    <Label Text="Razem ilościowo: " Grid.Column="1"/>
+                    <Frame Padding="5" Grid.Column="1" Grid.Row="2">
+                        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaIlosciowo}" Grid.Column="1" Grid.Row="2"/>
+                    </Frame>
+                </Grid>
+                <Label Text="Ilościowa: "/>
+                    <Frame Padding="5">
+                        <Label Text="{Binding SelectedAsortyment.Ilosciowa}" />
+                    </Frame>
+                    <Label Text="Termin: "/>
+                <Frame Padding="5">
+                    <Label Text="{Binding SelectedAsortyment.Termin}"/>
                 </Frame>
-                <Label Text="Razem ilościowo: " Grid.Column="1"/>
-                <Frame Padding="5" Grid.Column="1" Grid.Row="2">
-                    <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaIlosciowo}" Grid.Column="1" Grid.Row="2"/>
-                </Frame>
-            </Grid>
-            
-            <Label Text="Ilościowa: "/>
-            <Frame Padding="5">
-                <Label Text="{Binding SelectedAsortyment.Ilosciowa}" />
-            </Frame>
-            <Label Text="Termin: "/>
-            <Frame Padding="5">
-                <Label Text="{Binding SelectedAsortyment.Termin}"/>
-            </Frame>
+            </StackLayout>
         </StackLayout>
         <!-- endregion -->
         
         <!-- region footer -->
-        <Grid Grid.Row="2" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="DarkMagenta">
-            <Label Text="STOPKA" Grid.Row="0"/>
+        <Grid Grid.Row="2" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="LightSkyBlue" 
+              ColumnSpacing="5" Padding="3">
+            <Label Text="Rezerwacja:" Grid.Row="0"/>
+            <Label Text="{Binding SelectedAsortyment.Ilosciowa}" Grid.Column="1"/>
             <Button Text="REZERWUJ" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1"/>
+            <Button Text="KOREKTA" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1" Grid.Column="1"/>
         </Grid>
         <!-- endregion --> 
     </Grid>

@@ -8,17 +8,7 @@
     Shell.FlyoutBehavior="Flyout">
 
 
-    <!--Loading Page-->
-    <ShellContent
-        Title="Loading"
-        ContentTemplate="{DataTemplate views:LoadingPage}"
-        Route="loading" />
-    
     <!--Login Page-->
-    <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage"/>
     <ShellContent
         Title="Strona główna"
         ContentTemplate="{DataTemplate views:MainPage}"
@@ -32,6 +22,10 @@
         ContentTemplate="{DataTemplate views:UmowyPage}"
         Route="UmowyPage" />
 
+    <ShellContent
+        Title="Wyloguj"
+        />
+    
     <!--Main Page-->
     <TabBar>
         <Tab Title="Home" Icon="house_door_fill.svg">
