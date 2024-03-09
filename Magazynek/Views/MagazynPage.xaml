@@ -2,28 +2,16 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Magazynek.Views.MagazynPage"
-             Title="MagazynPage"
+             Title="Asortyment"
              xmlns:local="clr-namespace:Magazynek.ViewModels">
 
     <ContentPage.BindingContext>
         <local:ItemsViewModel />
     </ContentPage.BindingContext>
 
-    <Shell.TitleView>
-        <StackLayout>
-            <Label Text="Stan magazynu"/>
-            <Button Text="Wybierz magazyn"/>
-        </StackLayout>
-    </Shell.TitleView>
 
-    <StackLayout>
-        
-        <SearchBar TextChanged="OnSearchTextChanged" 
-                   Placeholder="Wyszukaj"
-                   HorizontalOptions="Fill"
-                   BackgroundColor="GhostWhite"
-                   />
-
+    <Grid RowDefinitions="Auto, *"> 
+ 
         <ListView x:Name="list"
                   ItemsSource="{Binding AsortymentSearched}" 
                   HasUnevenRows="True" 
@@ -33,7 +21,7 @@
                   RefreshCommand="{Binding ListView_RefreshCommand}" 
                   IsRefreshing="{Binding IsRefreshing}"
                   ItemTapped="ListItemTapped"
-                  >
+                  Grid.Row="1">
 
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -58,6 +46,29 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-    
-    </StackLayout>
+        
+
+
+        <Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto" BackgroundColor="LightSkyBlue">
+            <Line Grid.Row="2" Background="Black"/>
+            <Border Grid.Row="0" StrokeThickness="2" Margin="0" Padding="0" Stroke="Black">
+                <SearchBar TextChanged="OnSearchTextChanged"  Grid.Row="2" 
+                   Placeholder="Wyszukaj"
+                   HorizontalOptions="Fill"
+                   BackgroundColor="LightBlue"
+                   />
+            </Border>
+
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="Wybór Magazynu:" VerticalOptions="Center" Padding="5"/>
+                <Picker
+                    Title="Wybierz" 
+                    ItemsSource="{Binding MagazynySelection}" 
+                    ItemDisplayBinding="{Binding Nazwa}" 
+                    SelectedItem="{Binding SelectedMagazyn}" HorizontalOptions="FillAndExpand"/>
+            </StackLayout>
+        </Grid>
+        
+    </Grid>
 </ContentPage>

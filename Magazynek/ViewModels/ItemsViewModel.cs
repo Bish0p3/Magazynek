@@ -31,6 +31,31 @@ namespace Magazynek.ViewModels
             }
         }
 
+        private ObservableCollection<MagazynyModel> _magazynySelection;
+        public ObservableCollection<MagazynyModel> MagazynySelection
+        {
+            get { return _magazynySelection; }
+            set
+            {
+                _magazynySelection = value;
+                OnPropertyChanged(nameof(MagazynySelection));
+            }
+        }
+
+        private MagazynyModel _selectedMagazyn;
+        public MagazynyModel SelectedMagazyn
+        {
+            get { return _selectedMagazyn; }
+            set
+            {
+                if (_selectedMagazyn != value)
+                {
+                    _selectedMagazyn = value;
+                    OnPropertyChanged(nameof(SelectedMagazyn));
+                }
+            }
+        }
+
         private bool _isRefreshing;
         public bool IsRefreshing
         {
@@ -76,6 +101,13 @@ namespace Magazynek.ViewModels
 
             // Initialize the ObservableCollection
             Asortyment = new ObservableCollection<AsortymentyModel>();
+
+            MagazynySelection = new ObservableCollection<MagazynyModel>
+            {
+                new MagazynyModel { Nazwa = "Magazyn Główny" },
+                new MagazynyModel { Nazwa = "W transporcie" },
+                new MagazynyModel { Nazwa = "W produkcji" },
+            };
 
             // Call method to populate data
             _ = PopulateData();

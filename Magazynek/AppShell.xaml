@@ -8,17 +8,25 @@
     Shell.FlyoutBehavior="Flyout">
 
 
+    <ShellContent
+        Title="LoadingPage"
+        ContentTemplate="{DataTemplate views:LoadingPage}"
+        Route="LoadingPage" />
+    <ShellContent
+        Title="Login"
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage" />
     <!--Login Page-->
     <ShellContent
         Title="Strona główna"
         ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
     <ShellContent
-        Title="Magazyn"
+        Title="Asortyment"
         ContentTemplate="{DataTemplate views:MagazynPage}"
         Route="MagazynPage" />
     <ShellContent
-        Title="Umowy"
+        Title="Umowy dostaw"
         ContentTemplate="{DataTemplate views:UmowyPage}"
         Route="UmowyPage" />
 

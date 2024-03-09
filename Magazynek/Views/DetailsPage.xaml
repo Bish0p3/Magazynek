@@ -9,7 +9,7 @@
     </ContentPage.BindingContext>
 
 
-    <Grid RowDefinitions="Auto, 3*, 70">
+    <Grid RowDefinitions="Auto, 3*, Auto">
         <!-- region header-->
         <Label Text="DANE TOWARU" FontSize="Large" Grid.Row="0" Margin="5"/>
         <!-- endregion -->
