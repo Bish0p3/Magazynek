@@ -149,7 +149,7 @@ namespace Magazynek.ViewModels
                 Asortyment.Clear();
                 AsortymentSearched.Clear();
                 DatabaseService _databaseService = new DatabaseService();
-                List<AsortymentyModel> data = await _databaseService.GetYourDataAsync();
+                List<AsortymentyModel> data = await _databaseService.GetAsortymentDataAsync();
                 foreach (var item in data)
                 {
                     Asortyment.Add(item);

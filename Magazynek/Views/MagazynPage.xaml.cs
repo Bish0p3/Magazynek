@@ -42,4 +42,11 @@ public partial class MagazynPage : ContentPage
 
         if (sender is ListView lv) lv.SelectedItem = null;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        //var viewModel = (ItemsViewModel)BindingContext;
+        //await viewModel.PopulateData();
+    }
 }

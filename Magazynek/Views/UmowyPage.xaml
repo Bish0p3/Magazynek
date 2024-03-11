@@ -4,10 +4,48 @@
              x:Class="Magazynek.Views.UmowyPage"
              Title="UmowyPage"
              xmlns:local="clr-namespace:Magazynek.ViewModels">
-
+    
+    <ContentPage.BindingContext>
+        <local:UmowyViewModel />
+    </ContentPage.BindingContext>
 
     <StackLayout>
-        <Button Text="Show Data"/>
+        
+        <ListView x:Name="list"
+                  ItemsSource="{Binding UmowySearched}" 
+                  HasUnevenRows="True" 
+                  RowHeight="75" 
+                  IsPullToRefreshEnabled="True" 
+                  ItemSelected="OnItemSelected"
+                  RefreshCommand="{Binding ListView_RefreshCommand}" 
+                  IsRefreshing="{Binding IsRefreshing}"
+                  ItemTapped="ListItemTapped"
+                  Grid.Row="1">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Padding="5" Grid.Column="0" VerticalOptions="Start">
+                                <Label Text="Tytuł:" Style="{StaticResource Labelfont}"/>
+                                <Label Text="{Binding Tytul}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="TailTruncation"/>
+                                <Label Text="Syngatura:" Style="{StaticResource Labelfont}"/>
+                                <Label Text="{Binding PelnaSyngatura}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
+                            </StackLayout>
+                            <StackLayout Padding="5" Grid.Column="1" VerticalOptions="Start">
+                                <Label Text="Kwota:" Style="{StaticResource Labelfont}"/>
+                                <Label Text="{Binding KwotaDoZaplaty}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
 
     </StackLayout>
 </ContentPage>

@@ -1,5 +1,7 @@
 ﻿using Magazynek.Models;
 using Microsoft.Data.SqlClient;
+using System.Data;
+using System.Xml;
 
 namespace Magazynek.Services
 {
@@ -20,7 +22,7 @@ namespace Magazynek.Services
 
         }
 
-        public async Task<List<AsortymentyModel>> GetYourDataAsync()
+        public async Task<List<AsortymentyModel>> GetAsortymentDataAsync()
         {
             List<AsortymentyModel> data = new List<AsortymentyModel>();
 
@@ -71,6 +73,59 @@ namespace Magazynek.Services
                                 {
                                     item.Ilosc = Convert.ToString(Convert.ToDouble(item.Ilosc) + " szt.");
                                 }
+                                data.Add(item);
+                            }
+                        }
+                    }
+                    await connection.CloseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                // Handle the exception
+            }
+
+            return data;
+        }
+
+
+        public async Task<List<UmowyModel>> GetUmowyDataAsync()
+        {
+            List<UmowyModel> data = new List<UmowyModel>();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_SQLConnection))
+                {
+                    await connection.OpenAsync();
+
+                    string sqlQuery = "SELECT [Id],[MiejsceWydaniaWystawienia],[DataWprowadzenia],[NumerZewnetrzny],[DataWydaniaWystawienia],[TerminRealizacji],[KwotaDoZaplaty],[Symbol],[Tytul],[Podtytul],[Wystawil],[Odebral],[Uwagi], [NumerWewnetrzny_PelnaSygnatura]" +
+                        "FROM [Nexo_Demo_1].[ModelDanychContainer].[Dokumenty]" +
+                        "WHERE Symbol = 'ZK' OR Symbol = 'ZD'";
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                    {
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                UmowyModel item = new UmowyModel
+                                {
+                                    Id = reader[0],
+                                    MiejsceWydaniaWystawienia = reader.GetString(1),
+                                    DataWprowadzenia = reader["DataWprowadzenia"] as DateTime? ?? default,
+                                    NumerZewnetrzny = reader.GetString(3),
+                                    DataWydaniaWystawienia = reader["DataWydaniaWystawienia"] as DateTime? ?? default,
+                                    TerminRealizacji = reader["TerminRealizacji"] as DateTime? ?? default,
+                                    KwotaDoZaplaty = reader[6],
+                                    Symbol = reader[7],
+                                    Tytul = reader.GetString(8),
+                                    Podtytul = reader[9],
+                                    Wystawil = reader[10],
+                                    Odebral = reader[11],
+                                    Uwagi = reader[12],
+                                    PelnaSyngatura = reader[13]
+                                };
                                 data.Add(item);
                             }
                         }

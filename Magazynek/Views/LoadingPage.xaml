@@ -16,7 +16,7 @@
                 HorizontalOptions="Center" />
 
             <Label
-                Text="Magazynek"
+                Text="LOADING"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 FontAttributes="Bold"
