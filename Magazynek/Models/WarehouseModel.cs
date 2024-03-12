@@ -1,6 +1,6 @@
 ﻿namespace Magazynek.Models
 {
-    public class StanyMagazynowe
+    public class WarehouseModel
     {
 
         public int Id { get; set; }

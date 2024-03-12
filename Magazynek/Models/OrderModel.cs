@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Magazynek.Models
 {
-    public class UmowyModel
+    public class OrderModel
     {
         public object Id { get; set; }
         public string MiejsceWydaniaWystawienia { get; set; }

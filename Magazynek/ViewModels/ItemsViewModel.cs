@@ -9,8 +9,8 @@ namespace Magazynek.ViewModels
     public class ItemsViewModel : ObservableObject
     {
         #region FIELDS
-        private ObservableCollection<AsortymentyModel> _asortyment;
-        public ObservableCollection<AsortymentyModel> Asortyment
+        private ObservableCollection<ItemModel> _asortyment;
+        public ObservableCollection<ItemModel> Asortyment
         {
             get => _asortyment;
             set
@@ -20,8 +20,8 @@ namespace Magazynek.ViewModels
             }
         }
 
-        private ObservableCollection<AsortymentyModel> _asortymentSearched = new ObservableCollection<AsortymentyModel>();
-        public ObservableCollection<AsortymentyModel> AsortymentSearched
+        private ObservableCollection<ItemModel> _asortymentSearched = new ObservableCollection<ItemModel>();
+        public ObservableCollection<ItemModel> AsortymentSearched
         {
             get => _asortymentSearched;
             set
@@ -31,8 +31,8 @@ namespace Magazynek.ViewModels
             }
         }
 
-        private ObservableCollection<MagazynyModel> _magazynySelection;
-        public ObservableCollection<MagazynyModel> MagazynySelection
+        private ObservableCollection<WarehouseNamesModel> _magazynySelection;
+        public ObservableCollection<WarehouseNamesModel> MagazynySelection
         {
             get { return _magazynySelection; }
             set
@@ -69,8 +69,8 @@ namespace Magazynek.ViewModels
 
         public ICommand ListView_RefreshCommand { get; }
 
-        private AsortymentyModel _selectedAsortyment;
-        public AsortymentyModel SelectedAsortyment
+        private ItemModel _selectedAsortyment;
+        public ItemModel SelectedAsortyment
         {
             get => _selectedAsortyment;
             set
@@ -88,7 +88,7 @@ namespace Magazynek.ViewModels
             {
                 _searchText = value;
                 var linqResults = Asortyment.Where(s => s.Symbol.ToLower().Contains(_searchText.ToLower()));
-                AsortymentSearched = new ObservableCollection<AsortymentyModel>(linqResults);
+                AsortymentSearched = new ObservableCollection<ItemModel>(linqResults);
                 OnPropertyChanged(nameof(SearchText));
             }
         }
@@ -100,13 +100,13 @@ namespace Magazynek.ViewModels
             ListView_RefreshCommand = new Command(async () => await ExecuteRefreshCommand());
 
             // Initialize the ObservableCollection
-            Asortyment = new ObservableCollection<AsortymentyModel>();
+            Asortyment = new ObservableCollection<ItemModel>();
 
-            MagazynySelection = new ObservableCollection<MagazynyModel>
+            MagazynySelection = new ObservableCollection<WarehouseNamesModel>
             {
-                new MagazynyModel { Nazwa = "Magazyn Główny" },
-                new MagazynyModel { Nazwa = "W transporcie" },
-                new MagazynyModel { Nazwa = "W produkcji" },
+                new WarehouseNamesModel { Nazwa = "Magazyn Główny" },
+                new WarehouseNamesModel { Nazwa = "W transporcie" },
+                new WarehouseNamesModel { Nazwa = "W produkcji" },
             };
 
             // Call method to populate data
@@ -149,7 +149,7 @@ namespace Magazynek.ViewModels
                 Asortyment.Clear();
                 AsortymentSearched.Clear();
                 DatabaseService _databaseService = new();
-                List<AsortymentyModel> data = await _databaseService.GetAsortymentDataAsync(selectedIndex);
+                List<ItemModel> data = await _databaseService.GetAsortymentDataAsync(selectedIndex);
                 foreach (var item in data)
                 {
                     Asortyment.Add(item);

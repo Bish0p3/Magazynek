@@ -23,9 +23,9 @@ namespace Magazynek.Services
 
         }
 
-        public async Task<List<AsortymentyModel>> GetAsortymentDataAsync(int selectedWarehouse = 0)
+        public async Task<List<ItemModel>> GetAsortymentDataAsync(int selectedWarehouse = 0)
         {
-            List<AsortymentyModel> data = new List<AsortymentyModel>();
+            List<ItemModel> data = new List<ItemModel>();
             string warehouseName = string.Empty;
 
             switch (selectedWarehouse)
@@ -60,7 +60,7 @@ namespace Magazynek.Services
                         {
                             while (await reader.ReadAsync())
                             {
-                                AsortymentyModel item = new AsortymentyModel
+                                ItemModel item = new()
                                 {
                                     Id = reader.GetInt32(0),
                                     Symbol = reader.GetString(1),
@@ -111,9 +111,9 @@ namespace Magazynek.Services
         }
 
 
-        public async Task<List<UmowyModel>> GetUmowyDataAsync()
+        public async Task<List<OrderModel>> GetUmowyDataAsync()
         {
-            List<UmowyModel> data = new List<UmowyModel>();
+            List<OrderModel> data = new();
 
             try
             {
@@ -130,7 +130,7 @@ namespace Magazynek.Services
                         {
                             while (await reader.ReadAsync())
                             {
-                                UmowyModel item = new UmowyModel
+                                OrderModel item = new()
                                 {
                                     Id = reader[0],
                                     MiejsceWydaniaWystawienia = reader.GetString(1),

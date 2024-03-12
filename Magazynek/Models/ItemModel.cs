@@ -1,6 +1,6 @@
 ﻿namespace Magazynek.Models
 {
-    public class AsortymentyModel
+    public class ItemModel
     {
         public int Id { get; set; }
         public string Symbol { get; set; }

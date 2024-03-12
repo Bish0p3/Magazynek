@@ -16,8 +16,8 @@ namespace Magazynek.ViewModels
 
         #region FIELDS
 
-        private ObservableCollection<UmowyModel> _umowy;
-        public ObservableCollection<UmowyModel> Umowy
+        private ObservableCollection<OrderModel> _umowy;
+        public ObservableCollection<OrderModel> Umowy
         {
             get => _umowy;
             set
@@ -27,8 +27,8 @@ namespace Magazynek.ViewModels
             }
         }
 
-        private ObservableCollection<UmowyModel> _umowySearched = new ObservableCollection<UmowyModel>();
-        public ObservableCollection<UmowyModel> UmowySearched
+        private ObservableCollection<OrderModel> _umowySearched = new ObservableCollection<OrderModel>();
+        public ObservableCollection<OrderModel> UmowySearched
         {
             get => _umowySearched;
             set
@@ -38,8 +38,8 @@ namespace Magazynek.ViewModels
             }
         }
 
-        private UmowyModel _selectedUmowa;
-        public UmowyModel SelectedUmowa
+        private OrderModel _selectedUmowa;
+        public OrderModel SelectedUmowa
         {
             get => _selectedUmowa;
             set
@@ -70,7 +70,7 @@ namespace Magazynek.ViewModels
             {
                 _searchText = value;
                 var linqResults = Umowy.Where(s => s.Tytul.ToLower().Contains(_searchText.ToLower()));
-                UmowySearched = new ObservableCollection<UmowyModel>(linqResults);
+                UmowySearched = new ObservableCollection<OrderModel>(linqResults);
                 OnPropertyChanged(nameof(SearchText));
             }
         }
@@ -82,7 +82,7 @@ namespace Magazynek.ViewModels
             ListView_RefreshCommand = new Command(async () => await ExecuteRefreshCommand());
 
             // Initialize the ObservableCollection
-            Umowy = new ObservableCollection<UmowyModel>();
+            Umowy = new ObservableCollection<OrderModel>();
 
 
             // Call method to populate data
@@ -125,7 +125,7 @@ namespace Magazynek.ViewModels
                 Umowy.Clear();
                 UmowySearched.Clear();
                 DatabaseService _databaseService = new DatabaseService();
-                List<UmowyModel> data = await _databaseService.GetUmowyDataAsync();
+                List<OrderModel> data = await _databaseService.GetUmowyDataAsync();
                 foreach (var item in data)
                 {
                     Umowy.Add(item);

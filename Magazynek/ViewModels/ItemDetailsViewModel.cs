@@ -17,8 +17,8 @@ namespace Magazynek.ViewModels
             }
         }
 
-        private AsortymentyModel _selectedAsortyment;
-        public AsortymentyModel SelectedAsortyment
+        private ItemModel _selectedAsortyment;
+        public ItemModel SelectedAsortyment
         {
             get { return _selectedAsortyment; }
             set
@@ -35,7 +35,7 @@ namespace Magazynek.ViewModels
 
         public ItemDetailsViewModel()
         {
-            SelectedAsortyment = new AsortymentyModel();
+            SelectedAsortyment = new ItemModel();
 
             // Initialize or set SelectedItem as needed
             // For example: SelectedItem = new Item { Name = "Default Name", Description = "Default Description" };
