@@ -3,9 +3,9 @@ using Magazynek.ViewModels;
 
 namespace Magazynek.Views;
 
-public partial class UmowyPage : ContentPage
+public partial class OrdersPage : ContentPage
 {
-    public UmowyPage()
+    public OrdersPage()
     {
         InitializeComponent();
         BindingContext = new UmowyViewModel();
@@ -14,7 +14,7 @@ public partial class UmowyPage : ContentPage
 
     private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        if (e.SelectedItem is UmowyModel selectedUmowa)
+        if (e.SelectedItem is OrderModel selectedUmowa)
         {
             var viewModel = (UmowyViewModel)BindingContext;
             viewModel.SelectedUmowa = selectedUmowa;

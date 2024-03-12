@@ -23,11 +23,11 @@
         Route="MainPage" />
     <ShellContent
         Title="Asortyment"
-        ContentTemplate="{DataTemplate views:MagazynPage}"
+        ContentTemplate="{DataTemplate views:WarehousesPage}"
         Route="MagazynPage" />
     <ShellContent
         Title="Zamówienia"
-        ContentTemplate="{DataTemplate views:UmowyPage}"
+        ContentTemplate="{DataTemplate views:OrdersPage}"
         Route="UmowyPage" />
 
     <ShellContent
@@ -40,7 +40,7 @@
             <ShellContent
                 Icon="house_door_fill.svg"
         Title="Home"
-        ContentTemplate="{DataTemplate views:UmowyPage}"
+        ContentTemplate="{DataTemplate views:OrdersPage}"
         Route="home" />
 
         </Tab>
@@ -48,7 +48,7 @@
             <ShellContent
                 Icon="house_door_fill.svg"
         Title="Settings"
-        ContentTemplate="{DataTemplate views:UmowyPage}"
+        ContentTemplate="{DataTemplate views:OrdersPage}"
         Route="settings" />
         </Tab>
     </TabBar>

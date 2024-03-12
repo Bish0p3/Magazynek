@@ -10,7 +10,7 @@ public partial class DetailsPage : ContentPage
         BindingContext = new DetailsViewModel();
 
         var viewModel = (DetailsViewModel)BindingContext;
-        viewModel.SelectedAsortyment = (Models.AsortymentyModel)selectedAsortyment;
+        viewModel.SelectedAsortyment = (Models.ItemModel)selectedAsortyment;
         viewModel.CheckIfShouldBeVisible();
     }
     private void Rezerwacja_OnClick(object sender, EventArgs e)

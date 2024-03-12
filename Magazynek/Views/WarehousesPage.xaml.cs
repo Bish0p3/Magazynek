@@ -3,9 +3,9 @@ using Magazynek.ViewModels;
 
 namespace Magazynek.Views;
 
-public partial class MagazynPage : ContentPage
+public partial class WarehousesPage : ContentPage
 {
-    public MagazynPage()
+    public WarehousesPage()
     {
         InitializeComponent();
         BindingContext = new ItemsViewModel();
@@ -15,7 +15,7 @@ public partial class MagazynPage : ContentPage
     // ListView item selected
     private void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
-        if (e.SelectedItem is AsortymentyModel selectedAsortyment)
+        if (e.SelectedItem is ItemModel selectedAsortyment)
         {
             var viewModel = (ItemsViewModel)BindingContext;
             viewModel.SelectedAsortyment = selectedAsortyment;

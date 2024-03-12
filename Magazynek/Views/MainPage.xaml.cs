@@ -8,15 +8,15 @@ public partial class MainPage : ContentPage
     }
     private void Magazyny_OnClick(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MagazynPage() { Title = "Magazyny" });
+        Navigation.PushAsync(new WarehousesPage() { Title = "Magazyny" });
     }
     private void Rezerwacje_OnClick(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new UmowyPage() { Title = "Zamówienia" });
+        Navigation.PushAsync(new OrdersPage() { Title = "Zamówienia" });
     }
     private void Ustawienia_OnClick(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MagazynPage() { Title = "Ustawienia" });
+        Navigation.PushAsync(new WarehousesPage() { Title = "Ustawienia" });
     }
     private void Wyloguj_OnClick(object sender, EventArgs e)
     {

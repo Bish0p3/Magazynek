@@ -10,8 +10,8 @@ namespace Magazynek
 
             Routing.RegisterRoute("login", typeof(LoginPage));
             Routing.RegisterRoute("main", typeof(LoginPage));
-            Routing.RegisterRoute("magazyn", typeof(MagazynPage));
-            Routing.RegisterRoute("umowy", typeof(UmowyPage));
+            Routing.RegisterRoute("magazyn", typeof(WarehousesPage));
+            Routing.RegisterRoute("umowy", typeof(OrdersPage));
 
         }
     }
