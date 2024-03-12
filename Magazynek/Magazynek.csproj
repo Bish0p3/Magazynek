@@ -61,16 +61,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\NewOrderPage.xaml.cs">
+	    <DependentUpon>NewOrderPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OrderDetailsPage.xaml.cs">
+	    <DependentUpon>OrderDetailsPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\ItemDetailsPage.xaml.cs">
+	    <DependentUpon>ItemDetailsPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\LoadingPage.xaml.cs">
 	    <DependentUpon>LoadingPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\LoginPage.xaml.cs">
 	    <DependentUpon>LoginPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\OrdersPage.xaml.cs">
+	    <DependentUpon>OrdersPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\DetailsPage.xaml">
+	  <MauiXaml Update="Views\OrderDetailsPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ItemDetailsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoadingPage.xaml">
@@ -82,10 +97,10 @@
 	  <MauiXaml Update="Views\MainPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\NowaRezerwacjaPage.xaml">
+	  <MauiXaml Update="Views\NewOrderPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\UmowyPage.xaml">
+	  <MauiXaml Update="Views\OrdersPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

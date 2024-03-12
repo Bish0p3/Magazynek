@@ -10,8 +10,34 @@
     </ContentPage.BindingContext>
 
 
-    <Grid RowDefinitions="Auto, *"> 
- 
+    <Grid RowDefinitions="Auto, *">
+        
+        
+        <Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto" BackgroundColor="LightSkyBlue">
+            <Line Grid.Row="2" Background="Black"/>
+            <Border Grid.Row="0" StrokeThickness="2" Margin="0" Padding="0" Stroke="Black">
+                <SearchBar TextChanged="OnSearchTextChanged"  Grid.Row="2" 
+                   Placeholder="Wyszukaj"
+                   HorizontalOptions="Fill"
+                   BackgroundColor="LightBlue"
+                   />
+            </Border>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                <Label Text="Wybór Magazynu:" VerticalOptions="Center" Padding="5"/>
+
+                <Picker
+                    Title="Wybierz" 
+                    ItemsSource="{Binding MagazynySelection}" 
+                    ItemDisplayBinding="{Binding Nazwa}" 
+                    SelectedIndex="{Binding SelectedMagazyn}"
+                    SelectedIndexChanged="WarehousePicker_SelectedIndexChanged"
+                    HorizontalOptions="FillAndExpand"/>
+                
+            </StackLayout>
+        </Grid>
+
+        
         <ListView x:Name="list"
                   ItemsSource="{Binding AsortymentSearched}" 
                   HasUnevenRows="True" 
@@ -46,29 +72,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
-
-
-        <Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto" BackgroundColor="LightSkyBlue">
-            <Line Grid.Row="2" Background="Black"/>
-            <Border Grid.Row="0" StrokeThickness="2" Margin="0" Padding="0" Stroke="Black">
-                <SearchBar TextChanged="OnSearchTextChanged"  Grid.Row="2" 
-                   Placeholder="Wyszukaj"
-                   HorizontalOptions="Fill"
-                   BackgroundColor="LightBlue"
-                   />
-            </Border>
-
-
-            <StackLayout Grid.Row="1" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="Wybór Magazynu:" VerticalOptions="Center" Padding="5"/>
-                <Picker
-                    Title="Wybierz" 
-                    ItemsSource="{Binding MagazynySelection}" 
-                    ItemDisplayBinding="{Binding Nazwa}" 
-                    SelectedItem="{Binding SelectedMagazyn}" HorizontalOptions="FillAndExpand"/>
-            </StackLayout>
-        </Grid>
         
     </Grid>
 </ContentPage>

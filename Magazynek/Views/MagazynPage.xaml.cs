@@ -21,7 +21,7 @@ public partial class MagazynPage : ContentPage
             viewModel.SelectedAsortyment = selectedAsortyment;
 
             // Change view to detailsPage
-            Navigation.PushAsync(new DetailsPage(selectedAsortyment) { Title = "Szczegó³y elementu" });
+            Navigation.PushAsync(new ItemDetailsPage(selectedAsortyment) { Title = "Szczegó³y elementu" });
         }
     }
 
@@ -43,10 +43,16 @@ public partial class MagazynPage : ContentPage
         if (sender is ListView lv) lv.SelectedItem = null;
     }
 
-    protected override async void OnAppearing()
+    // Warehouse selection
+    private async void WarehousePicker_SelectedIndexChanged(object sender, EventArgs e)
     {
-        base.OnAppearing();
-        //var viewModel = (ItemsViewModel)BindingContext;
-        //await viewModel.PopulateData();
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex != -1)
+        {
+            var viewModel = (ItemsViewModel)BindingContext;
+            await viewModel.PopulateData(selectedIndex);
+        }
     }
 }

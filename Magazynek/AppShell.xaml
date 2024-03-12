@@ -26,7 +26,7 @@
         ContentTemplate="{DataTemplate views:MagazynPage}"
         Route="MagazynPage" />
     <ShellContent
-        Title="Umowy dostaw"
+        Title="Zamówienia"
         ContentTemplate="{DataTemplate views:UmowyPage}"
         Route="UmowyPage" />
 

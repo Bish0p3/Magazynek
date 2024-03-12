@@ -1,6 +1,7 @@
 ﻿using Magazynek.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Diagnostics.Metrics;
 using System.Xml;
 
 namespace Magazynek.Services
@@ -22,9 +23,28 @@ namespace Magazynek.Services
 
         }
 
-        public async Task<List<AsortymentyModel>> GetAsortymentDataAsync()
+        public async Task<List<AsortymentyModel>> GetAsortymentDataAsync(int selectedWarehouse = 0)
         {
             List<AsortymentyModel> data = new List<AsortymentyModel>();
+            string warehouseName = string.Empty;
+
+            switch (selectedWarehouse)
+            {
+                case 0:
+                    // magazyn główny
+                    warehouseName = "100000";
+                    break;
+
+                case 1:
+                    // w transporcie
+                    warehouseName = "100004";
+                    break;
+
+                case 2:
+                    // w produkcji
+                    warehouseName = "100005";
+                    break;
+            }
 
             try
             {
@@ -32,7 +52,8 @@ namespace Magazynek.Services
                 {
                     await connection.OpenAsync();
 
-                    string sqlQuery = "SELECT ModelDanychContainer.Asortymenty.Id, Symbol, Nazwa, Opis, CenaEwidencyjna, IloscDostepna, IloscZarezerwowanaIlosciowo, IloscZarezerwowanaDostawowo, Ilosc, Termin, Ilosciowa\r\nFROM ModelDanychContainer.Asortymenty\r\nFULL OUTER JOIN ModelDanychContainer.Rezerwacje ON ModelDanychContainer.Asortymenty.Id=ModelDanychContainer.Rezerwacje.Asortyment_Id\r\nFULL OUTER JOIN ModelDanychContainer.StanyMagazynowe ON ModelDanychContainer.Asortymenty.Id=ModelDanychContainer.StanyMagazynowe.Asortyment_Id";
+                    string sqlQuery = string.Format("SELECT Asortymenty.Id, Symbol, Nazwa, Opis, CenaEwidencyjna, IloscDostepna, IloscZarezerwowanaIlosciowo, IloscZarezerwowanaDostawowo, Ilosc, Termin, Ilosciowa\r\nFROM Nexo_Demo_1.ModelDanychContainer.Asortymenty\r\nFULL OUTER JOIN Nexo_Demo_1.ModelDanychContainer.Rezerwacje ON Asortymenty.Id=Rezerwacje.Asortyment_Id\r\nFULL OUTER JOIN Nexo_Demo_1.ModelDanychContainer.StanyMagazynowe ON Asortymenty.Id=StanyMagazynowe.Asortyment_Id\r\nWHERE Magazyn_Id={0}", warehouseName);
+
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
@@ -126,6 +147,10 @@ namespace Magazynek.Services
                                     Uwagi = reader[12],
                                     PelnaSyngatura = reader[13]
                                 };
+                                if (item.KwotaDoZaplaty is not System.DBNull)
+                                {
+                                    item.KwotaDoZaplaty = Convert.ToString(Convert.ToDouble(item.KwotaDoZaplaty) + " zł");
+                                }
                                 data.Add(item);
                             }
                         }

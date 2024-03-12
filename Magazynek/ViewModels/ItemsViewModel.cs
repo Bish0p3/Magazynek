@@ -42,8 +42,8 @@ namespace Magazynek.ViewModels
             }
         }
 
-        private MagazynyModel _selectedMagazyn;
-        public MagazynyModel SelectedMagazyn
+        private int _selectedMagazyn = 0;
+        public int SelectedMagazyn
         {
             get { return _selectedMagazyn; }
             set
@@ -137,7 +137,7 @@ namespace Magazynek.ViewModels
             }
         }
 
-        public async Task PopulateData()
+        public async Task PopulateData(int selectedIndex=0)
         {
             // ...
             await Task.Run(async () =>
@@ -148,8 +148,8 @@ namespace Magazynek.ViewModels
                 // Initialize DatabaseService
                 Asortyment.Clear();
                 AsortymentSearched.Clear();
-                DatabaseService _databaseService = new DatabaseService();
-                List<AsortymentyModel> data = await _databaseService.GetAsortymentDataAsync();
+                DatabaseService _databaseService = new();
+                List<AsortymentyModel> data = await _databaseService.GetAsortymentDataAsync(selectedIndex);
                 foreach (var item in data)
                 {
                     Asortyment.Add(item);
@@ -157,7 +157,6 @@ namespace Magazynek.ViewModels
                 }
             });
         }
-
 
         #endregion
 

@@ -12,11 +12,11 @@ public partial class MainPage : ContentPage
     }
     private void Rezerwacje_OnClick(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MagazynPage() { Title = "Magazyny" });
+        Navigation.PushAsync(new UmowyPage() { Title = "Zamówienia" });
     }
     private void Ustawienia_OnClick(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MagazynPage() { Title = "Magazyny" });
+        Navigation.PushAsync(new MagazynPage() { Title = "Ustawienia" });
     }
     private void Wyloguj_OnClick(object sender, EventArgs e)
     {

@@ -10,7 +10,7 @@
             HorizontalOptions="Center" />
         
         <Button Text="STANY MAGAZYNOWE" Clicked="Magazyny_OnClick"/>
-        <Button Text="REZERWACJE" Clicked="Rezerwacje_OnClick"/>
+        <Button Text="ZAMÓWIENIA" Clicked="Rezerwacje_OnClick"/>
         <Button Text="USTAWIENIA" Clicked="Ustawienia_OnClick"/>
         <Button Text="WYLOGUJ" Clicked="Wyloguj_OnClick"/>
     </VerticalStackLayout>
