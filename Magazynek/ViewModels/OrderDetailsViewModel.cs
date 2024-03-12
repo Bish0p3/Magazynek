@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace Magazynek.ViewModels
 {
-    public class DetailsViewModel : INotifyPropertyChanged
+    public class OrderDetailsViewModel : INotifyPropertyChanged
     {
         private bool _isReservationVisible;
         public bool IsReservationVisible
@@ -17,44 +17,29 @@ namespace Magazynek.ViewModels
             }
         }
 
-        private ItemModel _selectedAsortyment;
-        public ItemModel SelectedAsortyment
+        private OrderModel _selectedOrder;
+        public OrderModel SelectedOrder
         {
-            get { return _selectedAsortyment; }
+            get { return _selectedOrder; }
             set
             {
-                if (_selectedAsortyment != value)
+                if (_selectedOrder != value)
                 {
-                    _selectedAsortyment = value;
-                    OnPropertyChanged(nameof(SelectedAsortyment));
+                    _selectedOrder = value;
+                    OnPropertyChanged(nameof(SelectedOrder));
                 }
             }
         }
 
 
 
-        public DetailsViewModel()
+        public OrderDetailsViewModel()
         {
-            SelectedAsortyment = new ItemModel();
+            SelectedOrder = new OrderModel();
 
             // Initialize or set SelectedItem as needed
             // For example: SelectedItem = new Item { Name = "Default Name", Description = "Default Description" };
         }
-
-
-
-        public void CheckIfShouldBeVisible()
-        {
-            if (SelectedAsortyment.Ilosciowa is DBNull)
-            {
-                IsReservationVisible = false;
-            }
-            else
-            {
-                IsReservationVisible = true;
-            }
-        }
-
 
 
         // INotifyPropertyChanged implementation (you can use a base class if available)

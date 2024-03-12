@@ -8,7 +8,7 @@ public partial class OrdersPage : ContentPage
     public OrdersPage()
     {
         InitializeComponent();
-        BindingContext = new UmowyViewModel();
+        BindingContext = new OrdersViewModel();
         list.SelectedItem = null;
     }
 
@@ -16,11 +16,11 @@ public partial class OrdersPage : ContentPage
     {
         if (e.SelectedItem is OrderModel selectedUmowa)
         {
-            var viewModel = (UmowyViewModel)BindingContext;
+            var viewModel = (OrdersViewModel)BindingContext;
             viewModel.SelectedUmowa = selectedUmowa;
 
             // Change view to detailsPage
-            Navigation.PushAsync(new DetailsPage(selectedUmowa) { Title = "Szczegó³y elementu" });
+            Navigation.PushAsync(new OrderDetailsPage(selectedUmowa) { Title = "Szczegó³y elementu" });
         }
     }
 
@@ -29,7 +29,7 @@ public partial class OrdersPage : ContentPage
     {
         if (e.NewTextValue is not null)
         {
-            var viewModel = (UmowyViewModel)BindingContext;
+            var viewModel = (OrdersViewModel)BindingContext;
             viewModel.SearchText = e.NewTextValue;
         }
     }
@@ -46,7 +46,7 @@ public partial class OrdersPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
-        var viewModel = (UmowyViewModel)BindingContext;
+        var viewModel = (OrdersViewModel)BindingContext;
         await viewModel.PopulateData();
     }
 }

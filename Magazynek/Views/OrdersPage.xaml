@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Magazynek.ViewModels">
     
     <ContentPage.BindingContext>
-        <local:UmowyViewModel />
+        <local:OrdersViewModel />
     </ContentPage.BindingContext>
 
     <StackLayout>

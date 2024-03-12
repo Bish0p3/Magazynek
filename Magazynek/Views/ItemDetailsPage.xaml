@@ -5,7 +5,7 @@
              xmlns:local="clr-namespace:Magazynek.ViewModels">
 
     <ContentPage.BindingContext>
-        <local:DetailsViewModel />
+        <local:ItemDetailsViewModel />
     </ContentPage.BindingContext>
 
 

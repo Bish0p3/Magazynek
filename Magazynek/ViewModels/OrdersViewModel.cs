@@ -11,7 +11,7 @@ using System.Collections.ObjectModel;
 
 namespace Magazynek.ViewModels
 {
-    internal class UmowyViewModel : ObservableObject
+    internal class OrdersViewModel : ObservableObject
     {
 
         #region FIELDS
@@ -77,7 +77,7 @@ namespace Magazynek.ViewModels
         #endregion
 
         #region CONSTRUCTOR
-        public UmowyViewModel()
+        public OrdersViewModel()
         {
             ListView_RefreshCommand = new Command(async () => await ExecuteRefreshCommand());
 
