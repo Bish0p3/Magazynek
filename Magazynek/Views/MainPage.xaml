@@ -3,15 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Magazynek.Views.MainPage"
              Title="Strona główna">
-    <VerticalStackLayout Spacing="30" Margin="20">
-        <Label 
-            Text="Witaj! :NAME:"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout>
+        <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,*" Margin="20" ColumnSpacing="10" RowSpacing="10">
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Margin="10"
+                Text="Witaj! :NAME:" 
+                VerticalOptions="Center" 
+                HorizontalOptions="Center" />
         
-        <Button Text="STANY MAGAZYNOWE" Clicked="Magazyny_OnClick"/>
-        <Button Text="ZAMÓWIENIA" Clicked="Rezerwacje_OnClick"/>
-        <Button Text="USTAWIENIA" Clicked="Ustawienia_OnClick"/>
-        <Button Text="WYLOGUJ" Clicked="Wyloguj_OnClick"/>
+            <Button Text="STANY MAGAZYNOWE" Clicked="Magazyny_OnClick" Grid.Row="1" HeightRequest="180" BackgroundColor="LightSalmon"/>
+            <Button Text="ZAMÓWIENIA" Clicked="Rezerwacje_OnClick" Grid.Row="1" Grid.Column="1" BackgroundColor="LightSkyBlue"/>
+            <Button Text="USTAWIENIA" Clicked="Ustawienia_OnClick" Grid.Row="2" BackgroundColor="LightSeaGreen"/>
+            <Button Text="POMOC" Clicked="Help_Clicked"  Grid.Row="2" Grid.Column="2" HeightRequest="180" BackgroundColor="LightGreen"/>
+        </Grid>
+        <Button Text="Autor" Clicked="Author_Clicked" Margin="20, 0,20 ,10"/>
+        <Button Text="Wyloguj" Clicked="Wyloguj_OnClick" Margin="20,0,20,0"/>
+        
     </VerticalStackLayout>
 </ContentPage>

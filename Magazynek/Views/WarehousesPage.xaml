@@ -13,13 +13,13 @@
     <Grid RowDefinitions="Auto, *">
         
         
-        <Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto" BackgroundColor="LightSkyBlue">
+        <Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto" BackgroundColor="LightSalmon">
             <Line Grid.Row="2" Background="Black"/>
             <Border Grid.Row="0" StrokeThickness="2" Margin="0" Padding="0" Stroke="Black">
                 <SearchBar TextChanged="OnSearchTextChanged"  Grid.Row="2" 
                    Placeholder="Wyszukaj"
                    HorizontalOptions="Fill"
-                   BackgroundColor="LightBlue"
+                   BackgroundColor="#ffc8b3"
                    />
             </Border>
 

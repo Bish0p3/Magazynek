@@ -9,11 +9,6 @@
 
 
     <ShellContent
-        Title="Login"
-        ContentTemplate="{DataTemplate views:LoginPage}"
-        Route="LoginPage" />
-    <!--Login Page-->
-    <ShellContent
         Title="Strona główna"
         ContentTemplate="{DataTemplate views:MainPage}"
         Route="MainPage" />
@@ -26,9 +21,6 @@
         ContentTemplate="{DataTemplate views:OrdersPage}"
         Route="UmowyPage" />
 
-    <ShellContent
-        Title="Wyloguj"
-        />
     
     <!--Main Page-->
     <TabBar>

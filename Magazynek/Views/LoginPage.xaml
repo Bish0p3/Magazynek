@@ -37,7 +37,7 @@
                 IsPassword="True"/>
 
             <Button
-                Text="Zaloguj" />
+                Text="Zaloguj" Clicked="Button_Clicked"/>
 
 
         </VerticalStackLayout>

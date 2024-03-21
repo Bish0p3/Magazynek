@@ -20,6 +20,14 @@ public partial class MainPage : ContentPage
     }
     private void Wyloguj_OnClick(object sender, EventArgs e)
     {
-        //Navigation.PushAsync(new MagazynPage() { Title = "Magazyny" });
+        Application.Current.MainPage = new Magazynek.Views.LoginPage();
+    }
+    private void Author_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AuthorPage() { Title = "O autorze" });
+    }
+    private void Help_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new HelpPage() { Title = "Strona pomocy" });
     }
 }
