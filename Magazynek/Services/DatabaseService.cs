@@ -123,7 +123,7 @@ namespace Magazynek.Services
 
                     string sqlQuery = "SELECT [Id],[MiejsceWydaniaWystawienia],[DataWprowadzenia],[NumerZewnetrzny],[DataWydaniaWystawienia],[TerminRealizacji],[KwotaDoZaplaty],[Symbol],[Tytul],[Podtytul],[Wystawil],[Odebral],[Uwagi], [NumerWewnetrzny_PelnaSygnatura]" +
                         "FROM [Nexo_Demo_1].[ModelDanychContainer].[Dokumenty]" +
-                        "WHERE Symbol = 'ZK' OR Symbol = 'ZD'";
+                        "WHERE Symbol = 'ZK'";
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
