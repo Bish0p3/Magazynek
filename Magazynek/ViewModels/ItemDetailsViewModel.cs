@@ -1,10 +1,11 @@
-﻿using Magazynek.Models;
+﻿using Magazynek.Helpers;
+using Magazynek.Models;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace Magazynek.ViewModels
 {
-    public class ItemDetailsViewModel : INotifyPropertyChanged
+    public class ItemDetailsViewModel : ObservableObject
     {
         private bool _isReservationVisible;
         public bool IsReservationVisible
@@ -53,16 +54,6 @@ namespace Magazynek.ViewModels
             {
                 IsReservationVisible = true;
             }
-        }
-
-
-
-        // INotifyPropertyChanged implementation (you can use a base class if available)
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

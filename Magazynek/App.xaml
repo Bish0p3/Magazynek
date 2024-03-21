@@ -15,6 +15,18 @@
                     <Setter Property="FontSize" Value="12" />
                 </Style>
             </ResourceDictionary>
+            <ResourceDictionary>
+                <Style x:Key="FormNamesFont" TargetType="Label">
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="FontAttributes" Value="Bold"/>
+                </Style>
+            </ResourceDictionary>
+            <ResourceDictionary>
+                <Style x:Key="FormEntryFont" TargetType="Label">
+                    <Setter Property="FontSize" Value="12" />
+                    <Setter Property="TextColor" Value="Gray"/>
+                </Style>
+            </ResourceDictionary>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
