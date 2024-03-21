@@ -48,19 +48,8 @@ namespace Magazynek.ViewModels
         public OrderDetailsViewModel()
         {
             SelectedOrder = new OrderModel();
-            SelectedOrderItemsList = new ObservableCollection<ItemModel>
-            {
-                new ItemModel()
-                {
-                    Nazwa = "Produkt testowy",
-                    Ilosc = 20
-                },
-                new ItemModel()
-                {
-                    Nazwa = "Inny produkt testowy",
-                    Ilosc = 50
-                }
-            };
+            SelectedOrderItemsList = new ObservableCollection<ItemModel>();
+
             // Initialize or set SelectedItem as needed
             // For example: SelectedItem = new Item { Name = "Default Name", Description = "Default Description" };
         }

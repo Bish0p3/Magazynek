@@ -177,7 +177,10 @@ namespace Magazynek.Services
                 {
                     await connection.OpenAsync();
 
-                    string sqlQuery = string.Format("SELECT Symbol, Nazwa, CenaEwidencyjna, Ilosc FROM Nexo_Demo_1.ModelDanychContainer.Asortymenty\r\nFULL OUTER JOIN Nexo_Demo_1.ModelDanychContainer.Rozchody ON Asortymenty.Id = Rozchody.Asortyment_Id\r\nWHERE Rozchody.Rezerwacja_ID = '{0}'", order_id);
+                    string sqlQuery = string.Format("SELECT Symbol, Nazwa, Ilosc, Termin, CenaZCennika, AsortymentAktualnyId, MagazynId, Dokument_Id\r\n" +
+                        "FROM Nexo_Demo_1.ModelDanychContainer.PozycjeDokumentu\r\n" +
+                        "FULL OUTER JOIN Nexo_Demo_1.ModelDanychContainer.Asortymenty ON Nexo_Demo_1.ModelDanychContainer.PozycjeDokumentu.AsortymentAktualnyId=Nexo_Demo_1.ModelDanychContainer.Asortymenty.Id\r\n" +
+                        "WHERE Nexo_Demo_1.ModelDanychContainer.PozycjeDokumentu.Dokument_Id = {0};", order_id);
 
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
@@ -187,11 +190,13 @@ namespace Magazynek.Services
                             {
                                 ItemModel item = new()
                                 {
-                                    Symbol = (string)reader[0],
                                     Nazwa = (string)reader[1],
-                                    CenaEwidencyjna = reader[2],
-                                    Ilosc = reader[3]
+                                    Ilosc = reader[2]
                                 };
+                                if (item.Ilosc is not System.DBNull)
+                                {
+                                    item.Ilosc = Convert.ToString(Convert.ToDouble(item.Ilosc) + " szt.");
+                                }
                                 data.Add(item);
                             }
                         }
@@ -209,7 +214,7 @@ namespace Magazynek.Services
 
         }
 
-        public async Task MakeReservationAsync(string symbol, int asortyment_id, int ilosc_dostepna, bool ilosciowa, int ilosc_zrealizowana)
+        public async Task MakeReservationAsync(string symbol, int asortyment_id, int magazyn_id, int ilosc_dostepna, bool ilosciowa, int ilosc_zrealizowana)
         {
 
             var sqlQuery = string.Format("BEGIN TRANSACTION\r" +
@@ -225,6 +230,7 @@ namespace Magazynek.Services
                                 "\nSET IloscZarezerwowanaIlosciowo = {3}\r" +
                                 "\nWHERE Id={1};\r" +
                                 "\nROLLBACK", symbol, asortyment_id, ilosc_dostepna, ilosciowa, ilosc_zrealizowana);
+            // Magazyny: 100000 - magazyn główny, 100004 - w transporcie, 100005 - produkcja
 
             try
             {
