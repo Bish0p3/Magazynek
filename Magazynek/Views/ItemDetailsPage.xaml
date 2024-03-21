@@ -83,10 +83,8 @@
         <!-- region footer -->
         <Grid Grid.Row="2" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="LightSkyBlue" 
               ColumnSpacing="5" Padding="3">
-            <Label Text="Rezerwacja:" Grid.Row="0"/>
-            <Label Text="{Binding SelectedAsortyment.Ilosciowa}" Grid.Column="1"/>
-            <Button Text="REZERWUJ" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1"/>
-            <Button Text="KOREKTA" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1" Grid.Column="1"/>
+            <Label Text="Utwórz rezerwacje:" Grid.Row="0" Margin="5"/>
+            <Button Text="NOWA REZERWACJA" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1" Grid.ColumnSpan="2"/>
         </Grid>
         <!-- endregion --> 
     </Grid>

@@ -11,6 +11,31 @@
 
     <StackLayout>
         
+        <Grid Grid.Row="0" HorizontalOptions="FillAndExpand">
+            
+            <Grid Grid.Row="0" RowDefinitions="Auto, Auto, Auto" BackgroundColor="LightSkyBlue">
+                <Line Grid.Row="2" Background="Black"/>
+                <Border Grid.Row="0" StrokeThickness="2" Margin="0" Padding="0" Stroke="Black">
+                    <SearchBar TextChanged="OnSearchTextChanged"  Grid.Row="2" 
+                   Placeholder="Wyszukaj"
+                   BackgroundColor="LightBlue"/>
+                </Border>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                    <Label Text="Wybór Magazynu:" VerticalOptions="Center" Padding="5"/>
+
+                    <Picker
+                    Title="Wybierz" 
+                    ItemsSource="{Binding MagazynyOrdersSelection}" 
+                    ItemDisplayBinding="{Binding Nazwa}" 
+                    SelectedIndex="{Binding SelectedOrdersMagazyn}"
+                    SelectedIndexChanged="WarehousePicker_SelectedIndexChanged"
+                    HorizontalOptions="FillAndExpand"/>
+                </StackLayout>
+            </Grid>
+            
+        </Grid>
+        
         <ListView x:Name="list"
                   ItemsSource="{Binding UmowySearched}" 
                   HasUnevenRows="True" 
@@ -46,6 +71,14 @@
             </ListView.ItemTemplate>
         </ListView>
 
+        <Line BackgroundColor="Black"/>
+        <!-- region footer -->
+        <Grid Grid.Row="3" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="LightSkyBlue" 
+              ColumnSpacing="5" Padding="3">
+            <Label Text="Utwórz rezerwacje:" Grid.Row="0" Margin="5"/>
+            <Button Text="NOWA REZERWACJA" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1" Grid.ColumnSpan="2"/>
+        </Grid>
+        <!-- endregion -->
 
     </StackLayout>
 </ContentPage>

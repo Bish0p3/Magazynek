@@ -83,8 +83,8 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid ColumnDefinitions="*,*">
-                                    <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                <Grid ColumnDefinitions="4*, *" ColumnSpacing="5">
+                                    <StackLayout Grid.Column="0" Orientation="Horizontal" Spacing="2">
                                         <Label Text="Nazwa:" Style="{StaticResource Labelfont}"/>
                                         <Label Text="{Binding Nazwa}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="TailTruncation"/>
                                     </StackLayout>

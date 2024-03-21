@@ -43,6 +43,24 @@ public partial class OrdersPage : ContentPage
         if (sender is ListView lv) lv.SelectedItem = null;
     }
 
+    // Warehouse selection
+    private async void WarehousePicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var picker = (Picker)sender;
+        int selectedIndex = picker.SelectedIndex;
+
+        if (selectedIndex != -1)
+        {
+            var viewModel = (OrdersViewModel)BindingContext;
+            await viewModel.PopulateData(selectedIndex);
+        }
+    }
+    private void Rezerwacja_OnClick(object sender, EventArgs e)
+    {
+        // JAK PRZEKAZAC DANE
+        Navigation.PushAsync(new NewOrderPage() { Title = "Nowa rezerwacja" });
+    }
+
     protected override async void OnAppearing()
     {
         base.OnAppearing();

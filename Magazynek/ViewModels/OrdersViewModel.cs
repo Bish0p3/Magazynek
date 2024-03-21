@@ -16,6 +16,31 @@ namespace Magazynek.ViewModels
 
         #region FIELDS
 
+        private ObservableCollection<WarehouseNamesModel> _magazynyOrdersSelection;
+        public ObservableCollection<WarehouseNamesModel> MagazynyOrdersSelection
+        {
+            get { return _magazynyOrdersSelection; }
+            set
+            {
+                _magazynyOrdersSelection = value;
+                OnPropertyChanged(nameof(MagazynyOrdersSelection));
+            }
+        }
+
+        private int _selectedOrdersMagazyn = 0;
+        public int SelectedOrdersMagazyn
+        {
+            get { return _selectedOrdersMagazyn; }
+            set
+            {
+                if (_selectedOrdersMagazyn != value)
+                {
+                    _selectedOrdersMagazyn = value;
+                    OnPropertyChanged(nameof(SelectedOrdersMagazyn));
+                }
+            }
+        }
+
         private ObservableCollection<OrderModel> _umowy;
         public ObservableCollection<OrderModel> Umowy
         {
@@ -85,6 +110,13 @@ namespace Magazynek.ViewModels
             Umowy = new ObservableCollection<OrderModel>();
 
 
+            MagazynyOrdersSelection = new ObservableCollection<WarehouseNamesModel>
+            {
+                new WarehouseNamesModel { Nazwa = "Magazyn Główny" },
+                new WarehouseNamesModel { Nazwa = "W transporcie" },
+                new WarehouseNamesModel { Nazwa = "W produkcji" },
+            };
+
             // Call method to populate data
             _ = PopulateData();
         }
@@ -113,7 +145,7 @@ namespace Magazynek.ViewModels
             }
         }
 
-        public async Task PopulateData()
+        public async Task PopulateData(int selectedIndex = 0)
         {
             // ...
             await Task.Run(async () =>
@@ -125,7 +157,7 @@ namespace Magazynek.ViewModels
                 Umowy.Clear();
                 UmowySearched.Clear();
                 DatabaseService _databaseService = new DatabaseService();
-                List<OrderModel> data = await _databaseService.GetUmowyDataAsync();
+                List<OrderModel> data = await _databaseService.GetUmowyDataAsync(selectedIndex);
                 foreach (var item in data)
                 {
                     Umowy.Add(item);

@@ -111,19 +111,37 @@ namespace Magazynek.Services
         }
 
 
-        public async Task<List<OrderModel>> GetUmowyDataAsync()
+        public async Task<List<OrderModel>> GetUmowyDataAsync(int selectedWarehouse = 0)
         {
             List<OrderModel> data = new();
+            string warehouseName = string.Empty;
 
+            switch (selectedWarehouse)
+            {
+                case 0:
+                    // magazyn główny
+                    warehouseName = "100000";
+                    break;
+
+                case 1:
+                    // w transporcie
+                    warehouseName = "100004";
+                    break;
+
+                case 2:
+                    // w produkcji
+                    warehouseName = "100005";
+                    break;
+            }
             try
             {
                 using (SqlConnection connection = new SqlConnection(_SQLConnection))
                 {
                     await connection.OpenAsync();
 
-                    string sqlQuery = "SELECT [Id],[MiejsceWydaniaWystawienia],[DataWprowadzenia],[NumerZewnetrzny],[DataWydaniaWystawienia],[TerminRealizacji],[KwotaDoZaplaty],[Symbol],[Tytul],[Podtytul],[Wystawil],[Odebral],[Uwagi], [NumerWewnetrzny_PelnaSygnatura]" +
+                    string sqlQuery = String.Format("SELECT [Id],[MiejsceWydaniaWystawienia],[DataWprowadzenia],[NumerZewnetrzny],[DataWydaniaWystawienia],[TerminRealizacji],[KwotaDoZaplaty],[Symbol],[Tytul],[Podtytul],[Wystawil],[Odebral],[Uwagi], [NumerWewnetrzny_PelnaSygnatura]" +
                         "FROM [Nexo_Demo_1].[ModelDanychContainer].[Dokumenty]" +
-                        "WHERE Symbol = 'ZK'";
+                        "WHERE Symbol = 'ZK' AND StatusDokumentuId ='6' AND MagazynId='{0}'", warehouseName);
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
                         using (SqlDataReader reader = await command.ExecuteReaderAsync())
