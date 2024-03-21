@@ -11,83 +11,107 @@
 
     <Grid RowDefinitions="Auto, 3*, Auto">
         <!-- region header-->
-        <Label Text="DANE TOWARU" FontSize="Large" Grid.Row="0" Margin="5"/>
+        <Label Text="DANE ZAMÓWIENIA" FontSize="Large" Grid.Row="0" Margin="5"/>
         <!-- endregion -->
         
         <!-- region main-->
         <StackLayout Padding="5" Spacing="5" Grid.Row="1">
             <!--Nazwa i opis-->
-            <Label Text="Nazwa: " />
+            <Label Text="Sygnatura: " />
             <Frame Padding="5">
-                <Label Text="{Binding SelectedAsortyment.Nazwa}" />
+                <Label Text="{Binding SelectedOrder.PelnaSyngatura}" />
             </Frame>
-            <Label Text="Opis: "/>
+            <Label Text="Tytuł: "/>
             <Frame Padding="5">
-                <Label Text="{Binding SelectedAsortyment.Opis}" />
+                <Label Text="{Binding SelectedOrder.Tytul}" />
+            </Frame>
+            <Label Text="Podtytuł: "/>
+            <Frame Padding="5">
+                <Label Text="{Binding SelectedOrder.Podtytul}" />
             </Frame>
             <!--Reszta danych-->
             <Grid RowDefinitions="*, *" ColumnDefinitions="*,*" ColumnSpacing="5" RowSpacing="5">
-                <Label Text="Symbol: " Grid.Column="0" Grid.Row="0"/>
+                <Label Text="Kwota do zapłaty: " Grid.Column="0" Grid.Row="0"/>
                 <Frame Grid.Column="0" Grid.Row="1" Padding="5">
-                    <Label Text="{Binding SelectedAsortyment.Symbol}" />
+                    <Label Text="{Binding SelectedOrder.KwotaDoZaplaty}"/>
                 </Frame>
 
-                <Label Text="ID: " Grid.Column="1"/>
+                <Label Text="Zamawiający: " Grid.Column="1"/>
                 <Frame Grid.Column="1" Grid.Row="1" Padding="5">
                     <Label Text="{Binding SelectedAsortyment.Id}" Grid.Column="1" Grid.Row="1"/>
                 </Frame>
             </Grid>
-            <Label Text="Cena ewidencyjna: "/>
-            <Frame Padding="5">
-                <Label Text="{Binding SelectedAsortyment.CenaEwidencyjna}" />
-            </Frame>
-
-            <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="5" RowSpacing="5">
-                <Label Text="Ilość: "/>
-                <Frame Padding="5" Grid.Row="1">
-                    <Label Text="{Binding SelectedAsortyment.Ilosc}" />
+            <Grid RowDefinitions="*, *" ColumnDefinitions="*,*" ColumnSpacing="5" RowSpacing="5">
+                <Label Text="Wystawił: " Grid.Column="0" Grid.Row="0"/>
+                <Frame Grid.Column="0" Grid.Row="1" Padding="5">
+                    <Label Text="{Binding SelectedOrder.Wystawil}"/>
                 </Frame>
-                <Label Text="Ilość dostępna: " Grid.Column="1"/>
-                <Frame Padding="5" Grid.Column="1" Grid.Row="1">
-                    <Label Text="{Binding SelectedAsortyment.IloscDostepna}"/>
+
+                <Label Text="Odebrał: " Grid.Column="1"/>
+                <Frame Grid.Column="1" Grid.Row="1" Padding="5">
+                    <Label Text="{Binding SelectedOrder.Odebral}" Grid.Column="1" Grid.Row="1"/>
                 </Frame>
             </Grid>
-
-            <StackLayout Spacing="5" IsVisible="{Binding IsReservationVisible}">
-                <Line BackgroundColor="Black"/>
-                <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                    <Label Text="DANE REZERWACJI" FontSize="Large"/>
-                </StackLayout>
-                <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="5" RowSpacing="5">
-                    <Label Text="Razem dostawowo: "/>
-                    <Frame Padding="5" Grid.Row="1">
-                        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaDostawowo}" />
-                    </Frame>
-                    <Label Text="Razem ilościowo: " Grid.Column="1"/>
-                    <Frame Padding="5" Grid.Column="1" Grid.Row="2">
-                        <Label Text="{Binding SelectedAsortyment.IloscZarezerwowanaIlosciowo}" Grid.Column="1" Grid.Row="2"/>
-                    </Frame>
-                </Grid>
-                <Label Text="Ilościowa: "/>
-                    <Frame Padding="5">
-                        <Label Text="{Binding SelectedAsortyment.Ilosciowa}" />
-                    </Frame>
-                    <Label Text="Termin: "/>
-                <Frame Padding="5">
-                    <Label Text="{Binding SelectedAsortyment.Termin}"/>
+            
+            <Grid RowDefinitions="*, *" ColumnDefinitions="*,*" ColumnSpacing="5" RowSpacing="5">
+                <Label Text="Data wprowadzenia: " Grid.Column="0" Grid.Row="0"/>
+                <Frame Grid.Column="0" Grid.Row="1" Padding="5">
+                    <Label Text="{Binding SelectedOrder.DataWprowadzenia}"/>
                 </Frame>
-            </StackLayout>
+
+                <Label Text="Termin realizacji: " Grid.Column="1"/>
+                <Frame Grid.Column="1" Grid.Row="1" Padding="5">
+                    <Label Text="{Binding SelectedOrder.TerminRealizacji}" Grid.Column="1" Grid.Row="1"/>
+                </Frame>
+            </Grid>
+            
+            <Label Text="Uwagi: "/>
+            <Frame Padding="5">
+                <Label Text="{Binding SelectedOrder.Uwagi}" />
+            </Frame>
+
+            <Label Text="Dotyczy towaru: "/>
+            <Frame Padding="5" Grid.Row="1">
+                <ListView ItemsSource="{Binding SelectedOrderItemsList}"
+                              x:Name="list"
+                              HasUnevenRows="True" 
+                              RowHeight="75" 
+                              IsPullToRefreshEnabled="True" 
+                              RefreshCommand="{Binding ListView_RefreshCommand}" 
+                              IsRefreshing="{Binding IsRefreshing}"
+                              Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid ColumnDefinitions="*,*">
+                                    <StackLayout Grid.Column="0" Orientation="Horizontal">
+                                        <Label Text="Nazwa:" Style="{StaticResource Labelfont}"/>
+                                        <Label Text="{Binding Nazwa}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+                                    <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                        <Label Text="Ilość:" Style="{StaticResource Labelfont}"/>
+                                        <Label Text="{Binding Ilosc}" FontAttributes="Bold" Style="{StaticResource Labelfont}" LineBreakMode="CharacterWrap"/>
+                                    </StackLayout>
+                                </Grid>
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <!-- TODO: WSTAW TU LSITE -->
+            </Frame>
+
         </StackLayout>
         <!-- endregion -->
         
         <!-- region footer -->
-        <Grid Grid.Row="2" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="LightSkyBlue" 
+        <!--<Grid Grid.Row="2" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="LightSkyBlue" 
               ColumnSpacing="5" Padding="3">
             <Label Text="Rezerwacja:" Grid.Row="0"/>
             <Label Text="{Binding SelectedAsortyment.Ilosciowa}" Grid.Column="1"/>
             <Button Text="REZERWUJ" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1"/>
             <Button Text="KOREKTA" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1" Grid.Column="1"/>
-        </Grid>
+        </Grid>-->
         <!-- endregion --> 
     </Grid>
     

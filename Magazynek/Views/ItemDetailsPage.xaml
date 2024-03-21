@@ -56,7 +56,7 @@
             <StackLayout Spacing="5" IsVisible="{Binding IsReservationVisible}">
                 <Line BackgroundColor="Black"/>
                 <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                    <Label Text="DANE REZERWACJI" FontSize="Large"/>
+                    <Label Text="STAN ZAMÓWIEŃ" FontSize="Large"/>
                 </StackLayout>
                 <Grid ColumnDefinitions="*, *" RowDefinitions="*, *" ColumnSpacing="5" RowSpacing="5">
                     <Label Text="Razem dostawowo: "/>

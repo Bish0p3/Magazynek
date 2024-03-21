@@ -167,6 +167,48 @@ namespace Magazynek.Services
             return data;
         }
 
+        public async Task<List<ItemModel>> GetSelectedOrderItemsList(string order_id)
+        {
+            List<ItemModel> data = new();
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(_SQLConnection))
+                {
+                    await connection.OpenAsync();
+
+                    string sqlQuery = string.Format("SELECT Symbol, Nazwa, CenaEwidencyjna, Ilosc FROM Nexo_Demo_1.ModelDanychContainer.Asortymenty\r\nFULL OUTER JOIN Nexo_Demo_1.ModelDanychContainer.Rozchody ON Asortymenty.Id = Rozchody.Asortyment_Id\r\nWHERE Rozchody.Rezerwacja_ID = '{0}'", order_id);
+
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                    {
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                ItemModel item = new()
+                                {
+                                    Symbol = (string)reader[0],
+                                    Nazwa = (string)reader[1],
+                                    CenaEwidencyjna = reader[2],
+                                    Ilosc = reader[3]
+                                };
+                                data.Add(item);
+                            }
+                        }
+                    }
+                    await connection.CloseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+                // Handle the exception
+            }
+
+            return data;
+
+        }
+
         public async Task MakeReservationAsync(string symbol, int asortyment_id, int ilosc_dostepna, bool ilosciowa, int ilosc_zrealizowana)
         {
 

@@ -11,6 +11,7 @@ public partial class OrderDetailsPage : ContentPage
 
         var viewModel = (OrderDetailsViewModel)BindingContext;
         viewModel.SelectedOrder = (Models.OrderModel)selectedOrder;
+        _ = viewModel.PopulateData((Models.OrderModel)selectedOrder);
     }
     private void Rezerwacja_OnClick(object sender, EventArgs e)
     {
