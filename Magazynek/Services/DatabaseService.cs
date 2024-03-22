@@ -23,6 +23,17 @@ namespace Magazynek.Services
 
         }
 
+        public bool Login(string username, string password)
+        {
+            if (username == _databaseUsername || password == _databasePassword)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public async Task<List<ItemModel>> GetAsortymentDataAsync(int selectedWarehouse = 0)
         {
             List<ItemModel> data = new List<ItemModel>();
@@ -52,7 +63,7 @@ namespace Magazynek.Services
                 {
                     await connection.OpenAsync();
 
-                    string sqlQuery = string.Format("SELECT Asortymenty.Id, Symbol, Nazwa, Opis, CenaEwidencyjna, IloscDostepna, IloscZarezerwowanaIlosciowo, IloscZarezerwowanaDostawowo, Ilosc, Termin, Ilosciowa\r\nFROM Nexo_Demo_1.ModelDanychContainer.Asortymenty\r\nFULL OUTER JOIN Nexo_Demo_1.ModelDanychContainer.Rezerwacje ON Asortymenty.Id=Rezerwacje.Asortyment_Id\r\nFULL OUTER JOIN Nexo_Demo_1.ModelDanychContainer.StanyMagazynowe ON Asortymenty.Id=StanyMagazynowe.Asortyment_Id\r\nWHERE Magazyn_Id={0}", warehouseName);
+                    string sqlQuery = string.Format("SELECT Asortymenty.Id, Symbol, Nazwa, Opis, CenaEwidencyjna, IloscDostepna, IloscZarezerwowanaIlosciowo, IloscZarezerwowanaDostawowo, Ilosc, Termin, Ilosciowa\r\nFROM ModelDanychContainer.Asortymenty\r\nFULL OUTER JOIN ModelDanychContainer.Rezerwacje ON Asortymenty.Id=Rezerwacje.Asortyment_Id\r\nFULL OUTER JOIN ModelDanychContainer.StanyMagazynowe ON Asortymenty.Id=StanyMagazynowe.Asortyment_Id\r\nWHERE Magazyn_Id={0}", warehouseName);
 
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
@@ -140,7 +151,7 @@ namespace Magazynek.Services
                     await connection.OpenAsync();
 
                     string sqlQuery = String.Format("SELECT [Id],[MiejsceWydaniaWystawienia],[DataWprowadzenia],[NumerZewnetrzny],[DataWydaniaWystawienia],[TerminRealizacji],[KwotaDoZaplaty],[Symbol],[Tytul],[Podtytul],[Wystawil],[Odebral],[Uwagi], [NumerWewnetrzny_PelnaSygnatura]" +
-                        "FROM [Nexo_Demo_1].[ModelDanychContainer].[Dokumenty]" +
+                        "FROM [ModelDanychContainer].[Dokumenty]" +
                         "WHERE Symbol = 'ZK' AND StatusDokumentuId ='6' AND MagazynId='{0}'", warehouseName);
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {

@@ -13,5 +13,12 @@
         public object Ilosc { get; set; }
         public object Termin { get; set; }
         public object Ilosciowa { get; set; }
+        public string DisplayText
+        {
+            get
+            {
+                return $"{Nazwa}, Ilość dostępna: {Ilosc}";
+            }
+        }
     }
 }

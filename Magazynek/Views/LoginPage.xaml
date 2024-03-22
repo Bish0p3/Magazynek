@@ -1,7 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Magazynek.Views.LoginPage">
+             x:Class="Magazynek.Views.LoginPage"
+             xmlns:local="clr-namespace:Magazynek.ViewModels">
+
+
+    <ContentPage.BindingContext>
+        <local:LoginViewModel />
+    </ContentPage.BindingContext>
 
     <ScrollView>
         <VerticalStackLayout
@@ -30,14 +36,16 @@
                 HorizontalOptions="Center" />
 
             <Entry 
-                Placeholder="Login" />
+                Placeholder="Login"
+                Text="{Binding Username}"/>
 
             <Entry 
                 Placeholder="Hasło" 
-                IsPassword="True"/>
+                IsPassword="True"
+                Text="{Binding Password}"/>
 
             <Button
-                Text="Zaloguj" Clicked="Button_Clicked"/>
+                Text="Zaloguj" Clicked="Button_Clicked" Command="{Binding LoginCommand}"/>
 
 
         </VerticalStackLayout>

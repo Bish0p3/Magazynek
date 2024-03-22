@@ -80,13 +80,13 @@
         </StackLayout>
         <!-- endregion -->
         
-        <!-- region footer -->
+        <!-- region footer --><!--
         <Grid Grid.Row="2" RowDefinitions="*,*" ColumnDefinitions="*,*" VerticalOptions="Fill"  Background="LightSkyBlue" 
               ColumnSpacing="5" Padding="3">
             <Label Text="Utwórz rezerwacje:" Grid.Row="0" Margin="5"/>
             <Button Text="NOWA REZERWACJA" Clicked="Rezerwacja_OnClick"  Padding="5" Grid.Row="1" Grid.ColumnSpan="2"/>
         </Grid>
-        <!-- endregion --> 
+        --><!-- endregion --> 
     </Grid>
     
 </ContentPage>

@@ -88,6 +88,7 @@ namespace Magazynek.ViewModels
             {
                 _searchText = value;
                 var linqResults = Asortyment.Where(s => s.Symbol.ToLower().Contains(_searchText.ToLower()));
+                AsortymentSearched.Clear();
                 AsortymentSearched = new ObservableCollection<ItemModel>(linqResults);
                 OnPropertyChanged(nameof(SearchText));
             }

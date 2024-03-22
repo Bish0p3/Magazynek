@@ -6,7 +6,7 @@
     <VerticalStackLayout>
         <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,*" Margin="20" ColumnSpacing="10" RowSpacing="10">
             <Label Grid.Row="0" Grid.ColumnSpan="2" Margin="10"
-                Text="Witaj! :NAME:" 
+                Text="Witaj Borys!" 
                 VerticalOptions="Center" 
                 HorizontalOptions="Center" />
         

@@ -2,8 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Magazynek.Views.NewOrderPage"
-             Title="NowaRezerwacjaPage">
-    
+             Title="NowaRezerwacjaPage"
+             xmlns:local="clr-namespace:Magazynek.ViewModels">
+
+
+    <ContentPage.BindingContext>
+        <local:NewOrderViewModel />
+    </ContentPage.BindingContext>
+
     <VerticalStackLayout>
         
         <Label 
@@ -13,25 +19,25 @@
         
         <StackLayout Padding="10">
             <Label Text="Status:" Style="{StaticResource FormNamesFont}"/>
-            <Picker Title="Magazyn" TitleColor="LightGray"/>
+            <Picker Title="Magazyn" TitleColor="LightGray" ItemsSource="{Binding WarehouseNames}" ItemDisplayBinding="{Binding Nazwa}"/>
 
-            <Label Text="Asortyment:" Margin="20, 0, 0, 0" Style="{StaticResource FormNamesFont}"/>
-            <Picker Title="Towar" TitleColor="LightGray"/>
+            <Label Text="Asortyment:" Margin="0, 20, 0, 0" Style="{StaticResource FormNamesFont}"/>
+            <Picker Title="Towar" TitleColor="LightGray" ItemsSource="{Binding Items}" ItemDisplayBinding="{Binding DisplayText}"/>
             <Editor Placeholder="Ilość"/>
 
-            <Label Text="Dane:" Margin="20, 0, 0, 0" Style="{StaticResource FormNamesFont}"/>
+            <Label Text="Dane:" Margin="0, 20, 0, 0" Style="{StaticResource FormNamesFont}"/>
             <Editor Placeholder="Kwota do zapłaty"/>
             <Editor Placeholder="Tytuł"/>
             <Editor Placeholder="Podtytuł"/>
 
-            <Label Text="Data wprowadzenia:" Margin="20, 0, 0 ,0" Style="{StaticResource FormNamesFont}"/>
+            <Label Text="Data wprowadzenia:" Margin="0, 20, 0 ,0" Style="{StaticResource FormNamesFont}"/>
             <DatePicker Format="dd/MM/yyyy"/>
-            <Label Text="Data realizacji:" Margin="20, 0, 0, 0" Style="{StaticResource FormNamesFont}"/>
-            <DatePicker Format="dd/MM/yyyy" Margin="0, 0, 40, 0"/>
-            <Label Text="Dodatkowe dane:" Style="{StaticResource FormNamesFont}"/>
+            <Label Text="Data realizacji:" Style="{StaticResource FormNamesFont}"/>
+            <DatePicker Format="dd/MM/yyyy"/>
+            <Label Text="Dodatkowe dane:" Margin="0, 20, 0, 0" Style="{StaticResource FormNamesFont}"/>
             <Editor Placeholder="Uwagi"/>
          
         </StackLayout>
-        <Button Text="Zapisz" Margin="5"/>
+        <Button Text="Zapisz" Clicked="Button_Clicked" Margin="5"/>
     </VerticalStackLayout>
 </ContentPage>
